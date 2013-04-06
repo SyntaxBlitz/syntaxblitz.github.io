@@ -1,2 +1,1 @@
-syntaxblitz.github.io
-=====================
+This is the repository for [timothyaveni.com](http://timothyaveni.com/).
