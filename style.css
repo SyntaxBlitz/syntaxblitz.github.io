@@ -1,10 +1,63 @@
 body {
+	background-color: #444;
+	margin: 0;
+	padding: 0;
+
+	color: #dfdfdf;
 	font-family: 'Noto Sans', sans-serif;
+}
+
+#header {
+	margin-left: 80px;
+	margin-top: 60px;
+	margin-right: 80px;
+}
+
+#spiffyLittleArrow {
+	font-size: 24pt;
+	color: #676767;	/* same colour as #name */
+	margin-left: 15px;
+	display: none;
+}
+
+#navigation {
+	list-style-type: none;
+}
+
+nav, #navigation, #navigation li {
+	display: inline;
+	margin: 0; /* do a bit of a reset on the margin & padding so we can customise later */
+	padding: 0;
+}
+
+#navigation {
+	margin-left: 20px;
+	padding-right: 10px;
+	background-color: #333;
+}
+
+#navigation li {
+	margin-left: 20px;
+	padding-left: 10px;
+}
+
+#navigation li.first {
+	margin-left: 0;
+}
+
+#name {
+	font-size: 36pt;
+	color: #676767;
+}
+
+#content {
+	margin-left: 150px;
+	margin-right: 80px; /* enforce text wrapping before it reaches the very right if the screen during resize */
 }
 
 a {
 	text-decoration: none;
-	color: blue;
+	color: #fff;
 }
 a:hover {
 	text-decoration: underline;
