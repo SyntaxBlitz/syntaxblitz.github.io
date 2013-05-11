@@ -8,49 +8,19 @@
 			@import url(http://fonts.googleapis.com/css?family=Noto+Sans|Droid+Sans+Mono);
 			@import url('style.css');
 		</style>
-
-		<script>
-			var navState = false;	//navigation is NOT currently being shown
-			var navigationUl;
-			var spiffyLittleArrow;
-
-			window.onload = function() {
-				navigationUl = document.getElementById("navigation");
-				spiffyLittleArrow = document.getElementById("spiffyLittleArrow");
-				hideNavigation();
-
-				var headerDiv = document.getElementById("header");
-				headerDiv.onmouseover = function() {
-					showNavigation();
-				}
-
-				headerDiv.onmouseout = function() {
-					hideNavigation();
-				}
-			}
-
-			function hideNavigation() {
-				navigationUl.style.display = "none";
-				spiffyLittleArrow.style.display = "inline";
-				navState = false;
-			}
-
-			function showNavigation() {
-				navigationUl.style.display = "inline";
-				spiffyLittleArrow.style.display = "none";
-				navState = true;
-			}
-		</script>
 	</head>
 	
 	<body>
 		<div id="header">
 			<span id="name">timothy.aveni</span><!-- periods are the new spaces! -->
-			<span id="spiffyLittleArrow">&raquo;</span> <!-- right arrow quote is the closing quotation mark in French -->
 			<nav> <!-- timothyaveni.com: now with undefined% more HTML5 code! -->
 				<ul id="navigation">
-					<li class="first">
+					<li class="first active">
 						<a href="/">home</a>
+					</li>
+
+					<li>
+						<a href="#" title="wait, you expected actual content?">blog</a>
 					</li>
 				</ul>
 			</nav>

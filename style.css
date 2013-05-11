@@ -13,17 +13,6 @@ body {
 	margin-right: 80px;
 }
 
-#spiffyLittleArrow {
-	font-size: 24pt;
-	color: #676767;	/* same colour as #name */
-	margin-left: 15px;
-	display: none;
-}
-
-#navigation {
-	list-style-type: none;
-}
-
 nav, #navigation, #navigation li {
 	display: inline;
 	margin: 0; /* do a bit of a reset on the margin & padding so we can customise later */
@@ -33,12 +22,18 @@ nav, #navigation, #navigation li {
 #navigation {
 	margin-left: 20px;
 	padding-right: 10px;
-	background-color: #333;
+	
+	list-style-type: none;
 }
 
 #navigation li {
 	margin-left: 20px;
 	padding-left: 10px;
+	padding-right: 8px;	/* The 8px is a bit hackish, but the right padding looks too big otherwise  */
+}
+
+#navigation li.active {
+	background-color: #333;
 }
 
 #navigation li.first {
