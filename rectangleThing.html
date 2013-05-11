@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	
+	<head>
+		<title>
+			Rectangle thing
+		</title>
+
+		<script>
+			window.onload = function() {
+				// Initialise canvas
+
+				var WIDTH	= 800;
+				var HEIGHT	= 600;
+				var FPS		= 30;
+
+				var canvas	= document.createElement("canvas");
+					canvas.width	= WIDTH;
+					canvas.height	= HEIGHT;
+					canvas.style.border = "1px solid black";
+
+				var context	= canvas.getContext("2d");
+
+				document.body.appendChild(canvas);
+
+				// Scoreboard
+				var scoreBoardDiv = document.createElement("div");
+				scoreBoardDiv.innerHTML = "0";
+				document.body.appendChild(scoreBoardDiv);
+
+				var score = 0;
+
+				// Initialise game
+				var rightKeyPressed = false;
+				var leftKeyPressed = false;
+
+				var player = {
+					x:		WIDTH / 2,
+					y:		HEIGHT * (5 / 6),
+					width:	50,
+					height:	50
+				};
+				var maxPlayerVelocity	= 15;	//px/s
+				var playerAcceleration	= 3;	//px/s^2
+				var playerDeceleration	= 0.75;
+
+				var playerVector = {
+					x: 0.0
+				}
+
+				var enemies = [];
+				var maxEnemiesOnScreen = 5;
+				var enemyDelay = 750;
+				var lastEnemyMs = 0;
+				var enemySpeed = 10;
+				var gameOver = false;
+
+				var tick = function () {
+					if ( !gameOver ) {
+						score += 1;
+
+						clearCanvas();
+
+						processInput();
+						movePlayer();
+
+						updateEnemies();
+						checkCollisions();
+
+						drawPlayer();
+						drawEnemies();
+
+						updateScoreBoard();
+
+						enemySpeed = score / 100.0 + 10;
+						enemyDelay = 1 / enemySpeed * 7500;
+					}
+				}
+
+				var clearCanvas = function () {
+					context.clearRect(0, 0, WIDTH, HEIGHT);
+				}
+
+				var processInput = function () {
+					if ( leftKeyPressed ) {
+						playerVector.x -= playerAcceleration;
+					}
+					if ( rightKeyPressed ) {
+						playerVector.x += playerAcceleration;
+					}
+
+					if ( !leftKeyPressed && !rightKeyPressed && playerVector.x != 0 ) {
+						playerVector.x -= playerDeceleration * Math.abs( playerVector.x ) / playerVector.x;
+					}
+
+					if ( Math.abs( playerVector.x ) < playerDeceleration ) {	//otherwise it'll decelerate back and forth
+						playerVector.x = 0;
+					}
+
+					if ( Math.abs( playerVector.x ) > maxPlayerVelocity ) {
+						playerVector.x = maxPlayerVelocity * (playerVector.x / Math.abs(playerVector.x));
+					}
+				}
+
+				var movePlayer = function () {
+					player.x += playerVector.x;
+
+					if ((player.x - player.width / 2) < 0) {
+						player.x = player.width / 2;
+						playerVector.x = 0;
+					}
+
+					if ((player.x + player.width / 2) > WIDTH) {
+						player.x = WIDTH - (player.width / 2);
+						playerVector.x = 0;
+					}
+				}
+
+				var updateEnemies = function () {
+					for ( var enemyIndex in enemies ) {
+						enemies[enemyIndex].y += enemySpeed;
+						if ( enemies[enemyIndex].y > ( HEIGHT + enemies[enemyIndex].height / 2 ) ) {
+							enemies.splice(enemyIndex, 1);
+						}
+					}
+
+					if ( ( new Date() ).getTime() - lastEnemyMs >= enemyDelay && enemies.length < maxEnemiesOnScreen) {
+						enemies[enemies.length] = {x: Math.random() * WIDTH, y: -1 * 25, width: 50, height: 50};	//append new enemy
+						lastEnemyMs = ( new Date() ).getTime();
+					}
+				}
+
+				var checkCollisions = function () {
+					for ( var enemyIndex in enemies ) {
+						if ( rectsOverlap( enemies[enemyIndex], player ) ) {
+							gameOver = true;
+						}
+					}
+				}
+
+				var rectsOverlap = function (rect1, rect2) {
+					return rect1.x < (rect2.x + rect2.width) && (rect1.x + rect1.width) > rect2.x && rect1.y < (rect2.y + rect2.height) && (rect1.y + rect1.height) > rect2.y;
+				}
+
+				var drawPlayer = function () {
+					context.fillStyle = "black";
+					context.fillRect(player.x - player.width / 2, player.y - player.height / 2, player.width, player.height);
+				}
+
+				var drawEnemies = function () {
+					context.fillStyle = "red";
+					for ( var enemyIndex in enemies ) {
+						var enemy = enemies[enemyIndex];
+						context.fillRect(enemy.x - enemy.width / 2, enemy.y - enemy.height / 2, enemy.width, enemy.height);
+					}
+				}
+
+				var updateScoreBoard = function () {
+					if ( !gameOver ) {
+						scoreBoardDiv.innerHTML = score;
+					} else {
+						scoreBoardDiv.innerHTML = "DEAD! Score: " + score;
+					}
+				}
+
+				window.setInterval(tick, 1000.0 / FPS);
+
+				window.onkeydown = function (event) {
+					if ( event.keyCode == 37 ) {
+						leftKeyPressed	= true;
+					} else if ( event.keyCode == 39 ) {
+						rightKeyPressed	= true;
+					}
+				}
+
+				window.onkeyup = function (event) {
+					if ( event.keyCode == 37 ) {
+						leftKeyPressed	= false;
+					} else if ( event.keyCode == 39 ) {
+						rightKeyPressed	= false;
+					}
+				}
+
+			};
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+
+</html>
