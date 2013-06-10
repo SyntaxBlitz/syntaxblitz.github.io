@@ -4,6 +4,8 @@ from pyPdf import PdfFileReader, PdfFileWriter
 from reportlab.pdfgen import canvas
 from reportlab.lib import pagesizes
 from reportlab.lib.units import inch
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
 # some important constants
 MUSIC_XML_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-xml\\"
@@ -12,6 +14,8 @@ MUSIC_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-pdf\\"
 PAGENUM_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pagenum-pdf\\"
 PAGE_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\page-pdf\\"
 OUTPUT_DIR		= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pdf-output\\"
+
+PATH_TO_CAMBRIA	= "C:\\Windows\\Fonts\\CAMBRIA.TTC"
 
 LILYPOND_EXE_LOCATION = r"c:\Program Files (x86)\lilypond\usr\bin\lilypond.exe"
 
@@ -48,9 +52,10 @@ page.getPage(0).mergePage(musicLine.getPage(0))
 hexPageNumber = str(hex(pageNum))[2:]
 pageNumberPdfCanvas = canvas.Canvas(PAGENUM_PDF_DIR + pageNumber + ".pdf", pagesize=pagesizes.letter)
 
-pageNumberPdfCanvas.setFont("Times-Roman", 12)
+pdfmetrics.registerFont(TTFont("Cambria", PATH_TO_CAMBRIA))
+pageNumberPdfCanvas.setFont("Cambria", 12)
 if pageNum % 2 == 0:	# even pages are on left, so put text on right
-	widthOfText = pageNumberPdfCanvas.stringWidth(hexPageNumber, "Times-Roman", 12)
+	widthOfText = pageNumberPdfCanvas.stringWidth(hexPageNumber, "Cambria", 12)
 	pageNumberPdfCanvas.drawString(inch * 8.5 - inch * .5 - widthOfText, inch * 11 - inch * .5, hexPageNumber)
 else:	# put number on left
 	pageNumberPdfCanvas.drawString(inch * .5, inch * 11 - inch * .5, hexPageNumber)
