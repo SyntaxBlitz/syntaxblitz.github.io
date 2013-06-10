@@ -1,0 +1,16 @@
+
+\header {
+	tagline = ""
+} 
+ 
+\paper {
+	#(set-paper-size "letter")
+	left-margin = 1\in
+	right-margin = 1\in
+	top-margin = 10\in
+}
+
+\layout {
+  indent = #0
+  ragged-last = ##f
+ }
