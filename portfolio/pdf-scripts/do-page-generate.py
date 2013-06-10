@@ -18,16 +18,19 @@ LILYPOND_EXE_LOCATION = r"c:\Program Files (x86)\lilypond\usr\bin\lilypond.exe"
 pageNum = 0
 pageNumber = str(pageNum)
 
+numOfParts = 1
+
 # generate .ly file in music21
 music = converter.parse(MUSIC_XML_DIR + pageNumber + ".xml")
-
-# cleanup musicxml file
-
+numOfParts = len(music.getElementsByClass(stream.Part))
 music.write("lily", MUSIC_LY_DIR + pageNumber + ".ly")
 
 # add styling information to .ly file
 outFile = open(MUSIC_LY_DIR + pageNumber + ".ly", "a")	# 'a' opens for appending
-outFile.write(file("ly-to-append.txt","r").read())	# 'r' opens for just reading
+if numOfParts == 1:
+	outFile.write(file("ly-one-line.txt","r").read())	# 'r' opens for just reading
+else:
+	outFile.write(file("ly-two-lines.txt","r").read())	# 'r' opens for just reading
 outFile.close()
 		
 # turn .ly into .pdf

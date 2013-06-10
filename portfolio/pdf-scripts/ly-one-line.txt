@@ -8,6 +8,7 @@
 	left-margin = 1\in
 	right-margin = 1\in
 	top-margin = 10\in
+	bottom-margin = 0\in
 }
 
 \layout {
