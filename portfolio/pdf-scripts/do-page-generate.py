@@ -54,11 +54,13 @@ pageNumberPdfCanvas = canvas.Canvas(PAGENUM_PDF_DIR + pageNumber + ".pdf", pages
 
 pdfmetrics.registerFont(TTFont("Cambria", PATH_TO_CAMBRIA))
 pageNumberPdfCanvas.setFont("Cambria", 12)
-if pageNum % 2 == 0:	# even pages are on left, so put text on right
-	widthOfText = pageNumberPdfCanvas.stringWidth(hexPageNumber, "Cambria", 12)
-	pageNumberPdfCanvas.drawString(inch * 8.5 - inch * .5 - widthOfText, inch * 11 - inch * .5, hexPageNumber)
-else:	# put number on left
-	pageNumberPdfCanvas.drawString(inch * .5, inch * 11 - inch * .5, hexPageNumber)
+
+if pageNum != -1:	# title page is -1, and we don't want a page number there.
+	if pageNum % 2 == 0:	# even pages are on left, so put text on right
+		widthOfText = pageNumberPdfCanvas.stringWidth(hexPageNumber, "Cambria", 12)
+		pageNumberPdfCanvas.drawString(inch * 8.5 - inch * .5 - widthOfText, inch * 11 - inch * .5, hexPageNumber)
+	else:	# put number on left
+		pageNumberPdfCanvas.drawString(inch * .5, inch * 11 - inch * .5, hexPageNumber)
 
 pageNumberPdfCanvas.showPage()
 pageNumberPdfCanvas.save()
