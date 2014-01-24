@@ -25,22 +25,12 @@
 		<div id="content">	<!-- normally I dynamically make all the elements in JavaScript but that's ugly so here I go -->
 			You'll want to avoid minimising the page or switching to another tab while the metronome is running. It will get all off and sound really sad if you do that.<br>
 			<button id="startStopButton">Start!</button>
-			<button id="subdivideButton">Turn subdivision on</button><br>
+			<button id="subdivideButton">Turn subdivision on</button><button id="modeButton">Currently running through Undertow</button><br>
 			Tempo: <input type="range" id="bpmSlider" min="20" max="400" value="120" /> <input type="number" id="bpmNumber" min="20" max="400" value="120" /><br>
-			<div id="currentMeasure">Current measure: <input type="text" id="currentMeasureNumber" min="1" max="209" value="1" /></div>	<!-- this used to be type "number", but I wanted you to be able to type in rehearsal markings too. --> (protip: type in a letter A-V to jump to that rehearsal marking. The metronome will keep track of when the music switches to steady 4/4.)
+			<div id="currentMeasure"><label for="currentMeasureNumber">Current measure: </label><input type="text" id="currentMeasureNumber" min="1" max="209" value="1" /> (or type A-V to jump to that rehearsal marking. The metronome will keep track of when the music switches to steady 4/4.)</div>	<!-- this used to be type "number", but I wanted you to be able to type in rehearsal markings too. --><br>
+
 			<br>
 			<div id="beatString"></div>
 		</div>
-
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-		  ga('create', 'UA-38628874-4', 'timothyaveni.com');
-		  ga('send', 'pageview');
-
-		</script>
 	</body>
 </html>

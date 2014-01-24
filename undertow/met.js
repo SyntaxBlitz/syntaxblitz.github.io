@@ -13,6 +13,9 @@ window.onload = function () {
 	var nextEighthTimestamp = 0;
 	var subdivide = false;
 
+	var mode = true;	// true --> Undertow counting. false --> alternation
+	var currentMeasureType = false;	// like in `measures`, true --> 4/4 and false --> 7/8
+
 	var bpm = 120;
 
 	var startPlaying = function () {
@@ -64,7 +67,7 @@ window.onload = function () {
 
 		var beatStringDiv = document.getElementById("beatString");
 
-		if (measures[currentMeasure]) {	// 4/4
+		if ((!mode && currentMeasureType) || (mode && measures[currentMeasure])) {	// 4/4
 			if (eighthsCounted == 1) {
 				audio.highClick.play();
 			} else if (eighthsCounted % 2 == 1) {
@@ -76,7 +79,11 @@ window.onload = function () {
 			beatStringDiv.innerText = string44.substr(0, eighthsCounted);	// php-style substr
 
 			if (eighthsCounted == 8) {
-				currentMeasure++;
+				if (mode) {
+					currentMeasure++;
+				} else {
+					currentMeasureType = !currentMeasureType;
+				}
 				eighthsCounted = 0;
 			}
 		} else {	// 7/8
@@ -91,14 +98,22 @@ window.onload = function () {
 			beatStringDiv.innerText = string78.substr(0, eighthsCounted);	// php-style substr
 
 			if (eighthsCounted == 7) {
-				currentMeasure++;
+				if (mode) {
+					currentMeasure++;
+				} else {
+					currentMeasureType = !currentMeasureType;
+				}
 				eighthsCounted = 0;
 			}
 		}
 
-		if (currentMeasure > 209 - 1) stopPlaying();	// off-by-one because there are 209 measures in the piece but the last measure is at index 208
+		if (currentMeasure > 209 - 1) {	// off-by-one because there are 209 measures in the piece but the last measure is at index 208
+			stopPlaying();
+			currentMeasure = 0;
+			document.getElementById("currentMeasureNumber").value = (currentMeasure + 1);
+		}
 
-		// TODO: allow pure alternating 4/4 and 7/8 without tracking measures.
+		// TODO: add countoff for first measure.
 	}
 
 	window.setInterval(tick, 10);
@@ -118,6 +133,20 @@ window.onload = function () {
 		} else {
 			setSubdivide(true);
 			this.innerText = "Turn subdivision off";
+		}
+	};
+
+	document.getElementById("modeButton").onclick = function () {
+		if (mode) {
+			mode = false;
+			this.innerText = "Currently alternating 7/8 and 4/4";
+
+			document.getElementById("currentMeasure").style.display = "none";
+		} else {
+			mode = true;
+			this.innerText = "Currently running through Undertow";
+
+			document.getElementById("currentMeasure").style.display = "block";
 		}
 	};
 
@@ -141,5 +170,5 @@ window.onload = function () {
 		} else {
 			currentMeasure = rehearsalMarkings[this.value] - 1;
 		}
-	}
+	};
 };
