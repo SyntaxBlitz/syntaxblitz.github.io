@@ -62,6 +62,7 @@ window.onload = function () {
 
 	var manageEighths = function () {
 		document.getElementById("currentMeasureNumber").value = (currentMeasure + 1);
+
 		var string44 = "1+2+3+4+";
 		var string78 = "1+2+123";
 
@@ -165,10 +166,13 @@ window.onload = function () {
 
 	document.getElementById("currentMeasureNumber").onchange = function () {
 		stopPlaying();
-		if (rehearsalMarkings[this.value] === undefined) {
+		if (rehearsalMarkings[this.value.toUpperCase()] === undefined) {
 			currentMeasure = +this.value - 1;
+			if (isNaN(currentMeasure)) currentMeasure = 0;
 		} else {
-			currentMeasure = rehearsalMarkings[this.value] - 1;
+			currentMeasure = rehearsalMarkings[this.value.toUpperCase()] - 1;
 		}
+
+		document.getElementById("currentMeasureNumber").value = (currentMeasure + 1);
 	};
 };
