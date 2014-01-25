@@ -154,12 +154,18 @@ window.onload = function () {
 	var bpmSlider = document.getElementById("bpmSlider");
 	var bpmNumber = document.getElementById("bpmNumber");
 
-	bpmSlider.onmousemove = bpmSlider.onchange = function () {
-		setTempo(this.value);
-		bpmNumber.value = this.value;
+	bpmSlider.onfocus = function () {
+		bpmSlider.onmousemove = bpmSlider.onchange = function () {
+			setTempo(this.value);
+			bpmNumber.value = this.value;
+		};
 	};
 
-	bpmNumber.onchange = function () {
+	bpmSlider.onblur = function () {
+		bpmSlider.onmousemove = bpmSlider.onchange = undefined;
+	}
+
+	bpmNumber.onchange = bpmNumber.onkeyup = function () {
 		setTempo(this.value);
 		bpmSlider.value = this.value;
 	};
