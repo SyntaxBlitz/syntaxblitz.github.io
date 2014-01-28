@@ -181,4 +181,13 @@ window.onload = function () {
 
 		document.getElementById("currentMeasureNumber").value = (currentMeasure + 1);
 	};
+
+	document.body.onkeydown = function (event) {
+		if (event.keyCode == 32) {
+			if (playing)
+				stopPlaying();
+			else
+				startPlaying();
+		}
+	};
 };
