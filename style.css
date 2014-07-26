@@ -53,7 +53,8 @@ nav {
 
 #content {
 	margin-left: 150px;
-	margin-right: 80px; /* enforce text wrapping before it reaches the very right if the screen during resize */
+	margin-right: 80px; /* enforce text wrapping before it reaches the very right of the screen during resize */
+	margin-top: 20px;
 }
 
 a {
