@@ -2,6 +2,7 @@ body {
 	font-family: 'Noto Sans', sans-serif;
 	background-color: #444;
 	color: white;
+	padding: 30px;
 }
 a {
 	text-decoration: none;
