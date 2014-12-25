@@ -4,13 +4,16 @@ body {
 	color: #eee;
 	padding: 30px;
 }
+
 a {
 	text-decoration: none;
 	color: #fff;
 }
+
 a:hover {
 	text-decoration: underline;
 }
+
 ul {
 	list-style-type: none;
 }
