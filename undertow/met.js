@@ -113,8 +113,6 @@ window.onload = function () {
 			currentMeasure = 0;
 			document.getElementById("currentMeasureNumber").value = (currentMeasure + 1);
 		}
-
-		// TODO: add countoff for first measure.
 	}
 
 	window.setInterval(tick, 10);
