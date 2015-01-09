@@ -13,7 +13,7 @@ MUSIC_LY_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-ly\\"
 MUSIC_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-pdf\\"
 PAGENUM_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pagenum-pdf\\"
 PAGE_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\page-pdf\\"
-OUTPUT_DIR		= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pdf-output\\"
+OUTPUT_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pdf-output\\"
 
 PATH_TO_CAMBRIA	= "C:\\Windows\\Fonts\\CAMBRIA.TTC"
 
