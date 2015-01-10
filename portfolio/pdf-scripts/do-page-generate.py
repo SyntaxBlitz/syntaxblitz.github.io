@@ -8,14 +8,14 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
 # some important constants
-MUSIC_XML_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-xml\\"
-MUSIC_LY_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-ly\\"
-MUSIC_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-pdf\\"
-PAGENUM_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pagenum-pdf\\"
-PAGE_PDF_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\page-pdf\\"
-OUTPUT_DIR	= "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pdf-output\\"
+MUSIC_XML_DIR   = "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-xml\\"
+MUSIC_LY_DIR    = "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-ly\\"
+MUSIC_PDF_DIR   = "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\music-pdf\\"
+PAGENUM_PDF_DIR = "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pagenum-pdf\\"
+PAGE_PDF_DIR    = "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\page-pdf\\"
+OUTPUT_DIR      = "C:\\wamp\\www\\syntaxblitz.github.io\\portfolio\\pdf-output\\"
 
-PATH_TO_CAMBRIA	= "C:\\Windows\\Fonts\\CAMBRIA.TTC"
+PATH_TO_CAMBRIA = "C:\\Windows\\Fonts\\CAMBRIA.TTC"
 
 LILYPOND_EXE_LOCATION = r"c:\Program Files (x86)\lilypond\usr\bin\lilypond.exe"
 
