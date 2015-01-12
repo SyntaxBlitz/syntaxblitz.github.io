@@ -182,10 +182,11 @@ window.onload = function () {
 
 	document.body.onkeydown = function (event) {
 		if (event.keyCode == 32) {
-			if (playing)
+			if (playing) {
 				stopPlaying();
-			else
+			} else {
 				startPlaying();
+			}
 		}
 	};
 };
