@@ -73,8 +73,6 @@ var startMetronome = function () {
 			currentTime += 60 / bpm;
 		}
 	});
-
-	//console.log("done");
 };
 
 window.onload = function () {
