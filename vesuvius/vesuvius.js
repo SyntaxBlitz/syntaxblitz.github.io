@@ -105,7 +105,7 @@ vesuviusMeasures.push(2);
 for (var i = 0; i < 9; i++)
 	vesuviusMeasures.push(7);
 
-for (var i = 0; i < 10; i++)
+for (var i = 0; i < 10; i++)		// fermata marked
 	vesuviusMeasures.push(1);
 
 for (var i = 0; i < 2; i++)
