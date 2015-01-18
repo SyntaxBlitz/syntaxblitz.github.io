@@ -10,7 +10,7 @@ var context = new AudioContext();
 
 var setupSlider = function () {
 	var bpmSlider = document.getElementById("bpmSlider");
-	var bpmEntry = document.getElementById("bpmEntry");
+	var bpmEntry  = document.getElementById("bpmEntry");
 	bpmSlider.onchange = bpmSlider.onmousemove = function () {
 		bpmEntry.value = bpmSlider.value;
 	};
