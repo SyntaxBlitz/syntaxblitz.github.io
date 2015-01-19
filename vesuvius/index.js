@@ -79,7 +79,7 @@ window.onload = function () {
 	setupSlider();
 
 	loadBufferedSounds(function () {
-		var startButton = document.getElementById("startButton")
+		var startButton = document.getElementById("startButton");
 		startButton.disabled = "";
 		startButton.onclick = function () {
 			startMetronome();
