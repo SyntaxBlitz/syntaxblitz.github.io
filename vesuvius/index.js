@@ -81,7 +81,7 @@ window.onload = function () {
 	loadBufferedSounds(function () {
 		var startButton = document.getElementById("startButton");
 		startButton.disabled = "";
-		startButton.onclick = function () {
+		startButton.onclick  = function () {
 			startMetronome();
 		};
 	});
