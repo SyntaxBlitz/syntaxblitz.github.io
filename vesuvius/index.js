@@ -38,7 +38,7 @@ var loadBufferedSounds = function (callback) {
 				if (loaded == TOTAL_SOUNDS) {
 					callback();
 				}
-			}, function () {
+			}, function (error) {
 				// TODO: sound load error
 			});
 		};
