@@ -21,8 +21,6 @@ nav, #navigation, #navigation li {
 
 nav {
 	display: inline-table; /* If the nav needs to be on a newline, we push ALL of it at once instead of splitting it up. */
-							/* I was amazed when this actually worked. I just shoved 'inline-' before 'table' and it was magical! */
-							/* Unsure about browser support. */
 }
 
 #navigation {
