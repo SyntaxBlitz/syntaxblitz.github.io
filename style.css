@@ -1,6 +1,6 @@
 body {
 	background-color: #444;
-	margin: 0;
+	margin:  0;
 	padding: 0;
 
 	color: #eee;
@@ -8,8 +8,8 @@ body {
 }
 
 #header {
-	margin-left: 80px;
-	margin-top: 60px;
+	margin-left:  80px;
+	margin-top:   60px;
 	margin-right: 80px;
 }
 
