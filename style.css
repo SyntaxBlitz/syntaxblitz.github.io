@@ -15,7 +15,7 @@ body {
 
 nav, #navigation, #navigation li {
 	display: inline;
-	margin: 0; /* do a bit of a reset on the margin & padding so we can customise later */
+	margin:  0; /* do a bit of a reset on the margin & padding so we can customise later */
 	padding: 0;
 }
 
@@ -30,7 +30,7 @@ nav {
 
 #navigation li {
 	margin-left: 20px;
-	padding-left: 10px;
+	padding-left:  10px;
 	padding-right: 8px;	/* The 8px is a bit hackish, but the right padding looks too big otherwise  */
 }
 
