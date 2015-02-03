@@ -55,25 +55,28 @@ var startMetronome = function () {
 		var beatArray = measureTypes[measureType];
 
 		for (var i = 0; i < beatArray.length; i++) {
-			var source = context.createBufferSource();
-			switch (beatArray[i]) {
-				case 0:
-					source.buffer = audioSoundBuffers.highClick;
-					break;
-				case 1:
-					source.buffer = audioSoundBuffers.lowClick;
-					break;
-				case 2:
-					source.buffer = audioSoundBuffers.subClick;
-					break;
-			}
-			source.connect(context.destination);
-			source.start(currentTime);
-
+			scheduleClick(beatArray[i], currentTime);
 			currentTime += 60 / bpm;
 		}
 	});
 };
+
+var scheduleClick = function(clickId, time) {
+	var source = context.createBufferSource();
+	switch (clickId) {
+		case 0:
+			source.buffer = audioSoundBuffers.highClick;
+			break;
+		case 1:
+			source.buffer = audioSoundBuffers.lowClick;
+			break;
+		case 2:
+			source.buffer = audioSoundBuffers.subClick;
+			break;
+	}
+	source.connect(context.destination);
+	source.start(time);
+}
 
 window.onload = function () {
 	setupSlider();
