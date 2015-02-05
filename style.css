@@ -30,6 +30,7 @@ nav {
 
 #navigation li {
 	margin-left: 20px;
+	
 	padding-left:  10px;
 	padding-right: 8px;	/* The 8px is a bit hackish, but the right padding looks too big otherwise  */
 }
