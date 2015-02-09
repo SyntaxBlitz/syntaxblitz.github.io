@@ -3,15 +3,15 @@ window.onload = function () {
 	
 	var audio = {
 		highClick: document.getElementById("audio_highClick"),
-		lowClick: document.getElementById("audio_lowClick"),
-		subClick: document.getElementById("audio_subClick")
+		lowClick:  document.getElementById("audio_lowClick"),
+		subClick:  document.getElementById("audio_subClick")
 	};
 
-	var playing = false;
-	var currentMeasure = 0;
-	var eighthsCounted = 0;
+	var playing             = false;
+	var currentMeasure      = 0;
+	var eighthsCounted      = 0;
 	var nextEighthTimestamp = 0;
-	var subdivide = false;
+	var subdivide           = false;
 
 	var mode = true;	// true --> Undertow counting. false --> alternation
 	var currentMeasureType = false;	// like in `measures`, true --> 4/4 and false --> 7/8
