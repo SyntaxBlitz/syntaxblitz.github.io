@@ -49,10 +49,15 @@ nav {
 	margin-right: 20px;
 }
 
+#name:hover {
+	color: #eee;
+}
+
 #content {
 	margin-left:  150px;
 	margin-right: 80px; /* enforce text wrapping before it reaches the very right of the screen during resize */
 	margin-top:   40px;
+	width: 800px;
 }
 
 a {
@@ -66,4 +71,24 @@ a:hover {
 
 .code {
 	font-family: 'Droid Sans Mono', monospace;
+}
+
+.project {
+	margin-bottom: 30px;
+}
+
+.project-name {
+	font-size: 18pt;
+}
+
+.project-name a {
+	text-decoration: underline;
+}
+
+.project-name a:hover {
+	text-decoration: none;
+}
+
+.project-description {
+	padding-left: 40px;
 }
