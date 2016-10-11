@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>AVL tests</title>
+
+		<script src="d3.min.js"></script>
+		<script src="tests.js">
+			/* There's no AVL logic in this code.
+			*  All of the data for what operations should happen is pre-generated.
+			*  This code only renders the pre-generated content.
+			*  Sorry, you still have to do all of the coding work yourself :)
+			*/
+		</script>
+		<script src="index.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="index.css">
+	</head>
+
+	<body>
+		<div id="current"></div>
+		<svg width="960" height="600"></svg>
+		<br>
+		<select id="testSelect"></select><br>
+		<div id="controls">
+			<button id="nextButton" onclick="nextAction()">Next: add(4)</button><br>
+			<input id="numberInput" type="range" min="100" max="5000" value="1000"><div id="numberLabel">1000 ms/step</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+body {
+	font-family: sans-serif;
+}
+
+circle {
+	stroke: #ccc;
+	fill: #eee;
+}
+
+svg {
+	font-family: sans-serif;
+}
+
+.highlighted {
+	stroke: #a9f;
+}
+
+#current {
+	font-size: 24pt;
+	height: 50px;
+}
+
+.invisible {
+	display: none;
+}
