@@ -3,9 +3,11 @@
 *  This code only renders the pre-generated content.
 *  Sorry, you still have to do all of the coding work yourself :)
 */
-
 var test;
+var myTree;
 window.onload = function () {
+	var svg = d3.select('svg');
+
 	for (var i = 0; i < tests.length; i++) {
 		var option = document.createElement('option');
 		option.innerHTML = tests[i].name;
@@ -14,64 +16,114 @@ window.onload = function () {
 		document.getElementById('testSelect').appendChild(option);
 	}
 
+	var WIDTH = 960;
+	var HEIGHT = 600;
+	var duration = 1000;
+	var radii = [80, 70, 60, 40, 20, 15];
+	var radius = 60;
+
+	var timeouts = [];
+
+	var circleNode = function (text) {
+		var dur = duration / 2;
+		var node = svg.append('svg')
+			.attr('overflow', 'visible');
+
+		var circle = node.append('circle')
+			.attr('cx', 0)
+			.attr('cy', 0)
+			.attr('fill', 'black')
+			.transition()
+			.duration(dur)
+			.attr('r', radius * 4 / 5)
+			.attr('stroke-width', radius / 5);
+
+		var label = node.append('text')
+			.classed('label', true)
+			.text(text)
+			.attr('alignment-baseline', 'middle')
+			.attr('text-anchor', 'middle')
+			.attr('font-size', radius)
+			.style('transform', 'translateY(-.1em)')
+			.style('opacity', 0);
+
+		var heightLabel = node.append('text')
+			.classed('height', true)
+			.text(0)
+			.attr('alignment-baseline', 'middle')
+			.attr('text-anchor', 'middle')
+			.attr('font-size', radius / 2.5)
+			.style('transform', 'translateY(1.2em)')
+			.style('opacity', 0);
+
+		window.setTimeout(function () {
+			label.transition()
+				.duration(dur / 2)
+				.style('opacity', 1);
+
+			heightLabel.transition()
+				.duration(dur / 2)
+				.style('opacity', 1);
+		}, dur / 2);
+
+		return node;
+	};
+
+	// y is positive down
+
+	var getLocation = function (to) {
+		var y = (to.length + 1) * HEIGHT / (test.maxHeight + 1) - HEIGHT / ((test.maxHeight + 1) * 2);
+		var x = WIDTH / 2;
+		var horizontalSpace = WIDTH / Math.pow(2, to.length);
+		for (var i = 0; i < to.length; i++) {
+			var pixelsPerCircleAtThisLevel = WIDTH / Math.pow(2, i + 1);
+			x += to[i] * .5 * pixelsPerCircleAtThisLevel;
+		}
+		return {
+			x: x,
+			y: y
+		};
+	};
+
+	var getLeftPoint = function (to) {
+		var nodeCenter = getLocation(to);
+		return {
+			x: nodeCenter.x + radius * Math.cos(Math.PI + Math.PI / 6),
+			y: nodeCenter.y - radius * Math.sin(Math.PI + Math.PI / 6)
+		};
+	};
+
+	var getRightPoint = function (to) {
+		var nodeCenter = getLocation(to);
+		return {
+			x: nodeCenter.x + radius * Math.cos(-Math.PI / 6),
+			y: nodeCenter.y - radius * Math.sin(-Math.PI / 6)
+		};
+	};
+
+	var getTopPoint = function (to) {
+		var nodeCenter = getLocation(to);
+		return {
+			x: nodeCenter.x,
+			y: nodeCenter.y - radius,
+		};
+	};
+
 	document.getElementById('testSelect').onchange = function () {
+		document.getElementById('controls').style.display = 'block';
+		document.getElementById('current').innerHTML = '';
+		for (var i = 0; i < timeouts.length; i++) {
+			clearTimeout(timeouts[i]);
+		}
+
 		test = tests[this.value];
 
-		var svg = d3.select('svg');
 		svg.selectAll("*").remove();
-		var WIDTH = 960;
-		var HEIGHT = 600;
-		var duration = parseInt(document.getElementById('numberInput').value);
+		duration = parseInt(document.getElementById('numberInput').value);
 
 		elements = {};
 
-		var radii = [80, 70, 60, 40, 20, 15];
-		var radius = radii[test.maxHeight];	
-
-		var circleNode = function (text) {
-			var dur = duration / 2;
-			var node = svg.append('svg')
-				.attr('overflow', 'visible');
-
-			var circle = node.append('circle')
-				.attr('cx', 0)
-				.attr('cy', 0)
-				.attr('fill', 'black')
-				.transition()
-				.duration(dur)
-				.attr('r', radius * 4 / 5)
-				.attr('stroke-width', radius / 5);
-
-			var label = node.append('text')
-				.classed('label', true)
-				.text(text)
-				.attr('alignment-baseline', 'middle')
-				.attr('text-anchor', 'middle')
-				.attr('font-size', radius)
-				.style('transform', 'translateY(-.1em)')
-				.style('opacity', 0);
-
-			var heightLabel = node.append('text')
-				.classed('height', true)
-				.text(0)
-				.attr('alignment-baseline', 'middle')
-				.attr('text-anchor', 'middle')
-				.attr('font-size', radius / 2.5)
-				.style('transform', 'translateY(1.2em)')
-				.style('opacity', 0);
-
-			window.setTimeout(function () {
-				label.transition()
-					.duration(dur / 2)
-					.style('opacity', 1);
-
-				heightLabel.transition()
-					.duration(dur / 2)
-					.style('opacity', 1);
-			}, dur / 2);
-
-			return node;
-		};
+		radius = radii[test.maxHeight];	
 
 		var actionCallbacks = {
 			"spawnNode": function (data) {
@@ -222,46 +274,6 @@ window.onload = function () {
 			}
 		};
 
-		// y is positive down
-
-		var getLocation = function (to) {
-			var y = (to.length + 1) * HEIGHT / (test.maxHeight + 1) - HEIGHT / ((test.maxHeight + 1) * 2);
-			var x = WIDTH / 2;
-			var horizontalSpace = WIDTH / Math.pow(2, to.length);
-			for (var i = 0; i < to.length; i++) {
-				var pixelsPerCircleAtThisLevel = WIDTH / Math.pow(2, i + 1);
-				x += to[i] * .5 * pixelsPerCircleAtThisLevel;
-			}
-			return {
-				x: x,
-				y: y
-			};
-		}
-
-		var getLeftPoint = function (to) {
-			var nodeCenter = getLocation(to);
-			return {
-				x: nodeCenter.x + radius * Math.cos(Math.PI + Math.PI / 6),
-				y: nodeCenter.y - radius * Math.sin(Math.PI + Math.PI / 6)
-			};
-		};
-
-		var getRightPoint = function (to) {
-			var nodeCenter = getLocation(to);
-			return {
-				x: nodeCenter.x + radius * Math.cos(-Math.PI / 6),
-				y: nodeCenter.y - radius * Math.sin(-Math.PI / 6)
-			};
-		};
-
-		var getTopPoint = function (to) {
-			var nodeCenter = getLocation(to);
-			return {
-				x: nodeCenter.x,
-				y: nodeCenter.y - radius,
-			};
-		};
-
 		var lastActionPerformed = -1;
 		document.getElementById('nextButton').disabled = false;
 		document.getElementById('nextButton').innerHTML = 'Next: ' + test.actions[lastActionPerformed + 1].name;
@@ -308,5 +320,131 @@ window.onload = function () {
 		};
 	};
 
-	document.getElementById('testSelect').onchange();
+	showMyTree = function () {
+		document.getElementById('controls').style.display = 'none';
+		document.getElementById('current').innerHTML = 'Here\'s what your tree looked like. <a href="javascript:document.getElementById(\'testSelect\').onchange()">Click here</a> to go to the test.';
+
+		var levelOrderQueue = [];
+		if (myTree !== null) {
+			levelOrderQueue.push(myTree);
+		}
+		var i = 0;
+		while (levelOrderQueue.length > 0) {
+			var node = levelOrderQueue.shift();
+			(function (node, i) {
+				timeouts.push(window.setTimeout(function () {
+					var location = getLocation(node.location);
+					var svgNode = circleNode(node.data).attr('x', location.x).attr('y', location.y);
+					if (node.nodeClass === 'red') {
+						svgNode.selectAll('.label').classed('red', true);
+					}
+
+					svgNode.selectAll('.height').text(node.height);
+
+					timeouts.push(window.setTimeout(function () {
+						if (node.left !== null) {
+							var leftPoint = getLeftPoint(node.location);
+							var topPoint = getTopPoint(node.left.location);
+							svg.append('line')
+								.attr('x1', leftPoint.x)
+								.attr('x2', leftPoint.x)
+								.attr('y1', leftPoint.y)
+								.attr('y2', leftPoint.y)
+								.attr('stroke-width', '2')
+								.attr('stroke', 'black')
+							.transition().duration(300)
+								.attr('x2', topPoint.x)
+								.attr('y2', topPoint.y);
+						}
+
+						timeouts.push(window.setTimeout(function () {
+							if (node.right !== null) {
+								var rightPoint = getRightPoint(node.location);
+								var topPoint = getTopPoint(node.right.location);
+								svg.append('line')
+									.attr('x1', rightPoint.x)
+									.attr('x2', rightPoint.x)
+									.attr('y1', rightPoint.y)
+									.attr('y2', rightPoint.y)
+									.attr('stroke-width', '2')
+									.attr('stroke', 'black')
+								.transition().duration(300)
+									.attr('x2', topPoint.x)
+									.attr('y2', topPoint.y);
+							}
+						}, 150));
+					}, 300));
+				}, i * 150));
+			})(node, i);
+			i++;
+			if (node.left !== null) {
+				levelOrderQueue.push(node.left);
+			}
+			if (node.right !== null) {
+				levelOrderQueue.push(node.right);
+			}
+		}
+	};
+
+	if (location.hash.length === 0) {
+		document.getElementById('testSelect').onchange();
+	} else {
+		var split = location.hash.substring(1).split('/');
+		var element = document.getElementById('testSelect');
+		for (var i = 0; i < element.childNodes.length; i++) {
+			if (element.childNodes[i].innerHTML === split[0]) {
+				element.childNodes[i].selected = true;
+				element.onchange();
+			}
+		}
+
+		if (split.length === 2) {
+			myTree = parseMyTree(split[1]);
+			showMyTree();
+		}
+	}
+};
+
+var parseMyTree = function (treeString) {
+	if (treeString.length === 0)
+		return;
+
+	return parseSubTree(treeString, [], new Set());
+};
+
+var parseSubTree = function (substring, location, alreadyParsedSet) {
+	if (substring.length === 0) {
+		return null;
+	}
+
+	var parenIndex = substring.indexOf('(');
+	var nodeData = substring.substring(0, parenIndex).split('_');
+
+	var commaIndex = parenIndex + 1;
+	var hasGoneUp = false;
+	var depth = 0;
+	if (substring[commaIndex] !== ',') {
+		while (depth !== 0 || !hasGoneUp) {
+			if (substring[commaIndex] === '(') {
+				depth++;
+				hasGoneUp = true;
+			} else if (substring[commaIndex] === ')') {
+				depth--;
+			}
+			commaIndex++;
+		}
+	}
+
+	var nodeClass = alreadyParsedSet.has(nodeData[0]) ? 'red' : '';
+	alreadyParsedSet.add(nodeData[0]);
+
+	return {
+		data: nodeData[0],
+		height: nodeData[1],
+		bf: nodeData[2],
+		left: parseSubTree(substring.substring(parenIndex + 1, commaIndex), location.concat(-1), alreadyParsedSet),
+		right: parseSubTree(substring.substring(commaIndex + 1, substring.length - 1), location.concat(1), alreadyParsedSet),
+		location: location,
+		nodeClass: nodeClass
+	};
 };
