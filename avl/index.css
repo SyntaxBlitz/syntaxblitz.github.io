@@ -23,3 +23,11 @@ svg {
 .invisible {
 	display: none;
 }
+
+.red {
+	fill: #900;
+}
+
+#mainView {
+	border: 1px dashed #ccc;
+}
