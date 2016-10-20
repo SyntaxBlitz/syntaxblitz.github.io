@@ -277,13 +277,34 @@ window.onload = function () {
 		var lastActionPerformed = -1;
 		document.getElementById('nextButton').disabled = false;
 		document.getElementById('nextButton').innerHTML = 'Next: ' + test.actions[lastActionPerformed + 1].name;
+		document.getElementById('backButton').disabled = true;
+		document.getElementById('backButton').innerHTML = 'Previous: none';
 
 		document.getElementById('numberInput').disabled = false;
+
+		back = function () {
+			if (lastActionPerformed === -1) {
+				return;
+			}
+
+			var oldLastActionPerformed = lastActionPerformed;
+			var oldDuration = document.getElementById('numberInput').value;
+
+			document.getElementById('testSelect').onchange();
+			duration = 0;
+			for (var i = 0; i < oldLastActionPerformed; i++) {
+				nextAction();
+			}
+			window.setTimeout(function () {
+				duration = oldDuration;
+			}, 0);
+		};
 
 		nextAction = function () {
 			lastActionPerformed++;
 			var action = test.actions[lastActionPerformed];
 			document.getElementById('nextButton').disabled = true;
+			document.getElementById('backButton').disabled = true;
 			document.getElementById('numberInput').disabled = true;
 			for (var i = 0; i < action.steps.length; i++) {
 				(function (i) {
@@ -304,12 +325,15 @@ window.onload = function () {
 				document.getElementById('nextButton').disabled = true;
 			}
 
+			document.getElementById('backButton').innerHTML = 'Previous: ' + test.actions[lastActionPerformed].name;
+
 			window.setTimeout(function () {
 				svg.selectAll('circle')
 					.classed('highlighted', false);
 				if (test.actions.length !== lastActionPerformed + 1) {
 					document.getElementById('nextButton').disabled = false;
 				}
+				document.getElementById('backButton').disabled = false;
 				document.getElementById('numberInput').disabled = false;
 			}, i * duration);
 		};
