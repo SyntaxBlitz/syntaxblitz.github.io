@@ -92,3 +92,15 @@ a:hover {
 .project-description {
 	padding-left: 40px;
 }
+
+.github-link {
+	margin-bottom: 100px;
+}
+
+.github-link a {
+	text-decoration: underline;
+}
+
+.github-link a:hover {
+	text-decoration: none;
+}
