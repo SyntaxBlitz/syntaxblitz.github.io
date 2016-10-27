@@ -1,0 +1,89 @@
+Timothy J. Aveni
+(609) 630-0456
+me@timothyaveni.com
+timothyaveni.com
+
+Education
+
+Georgia Institute of Technology – Atlanta, GA
+	- Candidate for Bachelor of Science in Computer Science
+	- Expected graduation – May 2019
+	- Threads: Intelligence and Information Internetworks
+
+Hightstown High School – Hightstown, NJ
+	- September 2012 – June 2016
+	- GPA: 4.56 / 4.0 (weighted)
+
+Work experience
+	Upwork.com - Various contract work
+		August 2016 – present
+		- Worked with clients individually to assess their needs and respond with appropriate content and solutions
+		- Analyzed a foreign code base to determine the cause of a problem and create a long-term solution
+		- Advised a client on security concerns within his existing content management system
+		- Wrote 18,000+ words of article content about trends in consumer electronics
+	Private one-on-one tutoring
+		October 2015 – December 2015
+		- Led a community college student through a full Web Development course
+		- Guided the student as he programmed in a pair-programming style
+		- Worked in person as well as remotely with screen sharing software
+
+Skills
+	Languages
+		- JavaScript (ES6)
+		- HTML5/CSS3
+		- Java
+		- Python
+	Technologies
+		- Node.js
+		- Express
+		- Socket.io
+		- AngularJS
+		- jQuery
+		- Web Audio API
+	Spoken Lanuages
+		- English (native)
+		- French (intermediate)
+
+Projects
+	Wavelyric - July 2016
+		Web-based tool for mapping song lyrics to a karaoke track
+		- Developed a fast open-source canvas waveform rendering library in JS
+		- Resolved an unmet stretch goal worth $3,000 by developing this tool
+		- Published the tool for use alongside a video game with 15,000+ players
+	Cookie Externalities - April 2016
+		Real-time game and learning experience for a Microeconomics class
+		- Wrote a Node.js server that supported 30+ concurrent connections
+		- Designed and built an AngularJS UX for a competitive market simulator
+		- Used the game to teach the impacts of externalities in a free market
+	Skyward.link - March 2015 – October 2015
+		Web-based tool to use a phone to control a Google Slides presentation
+		- Developed a back-end with Node.js and Socket.io
+		- Developed three front-end clients in HTML and JavaScript
+		- Published the source code under the MIT license
+	PluckLock - November 2014 – December 2014
+		Android app that locks the device when it is snatched from the owner
+		- Developed the app in Java and XML with the Android SDK
+		- Published to the Google Play store (250+ installs) and F-Droid
+		- Received pull requests for translations into German and Italian
+
+More projects and information available at timothyaveni.com
+
+Involvement
+	Activities
+		Hightstown HS Marching Band 2012 – 2016
+			Assistant Drum Major, Trumpet Captain
+		GA Tech Marching Band
+			2016 – present
+			Member
+		Hightstown HS STEM Club
+			2014 – 2016
+			Co-founder, Vice President
+		DramaTech
+			2016 – present
+			Assistant sound engineer
+
+	Awards
+		Best Data Visualization, HackGT - 2016
+		Best Improvement to the Shopping Experience at Macy's, HackGT - 2016
+		National Merit Scholar - 2016
+		National AP Scholar - 2016
