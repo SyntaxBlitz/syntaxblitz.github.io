@@ -1,0 +1,60 @@
+steps:
+	1. text.html
+	2. text.json, programmatic:
+		{'data': arr}
+		arr is an array of objects, one of five types
+		{'type': 'act', 'name': 'ACT I.'}
+		{'type': 'scene', 'name': 'SCENE I. King Lear\'s palace.'}
+		{'type': 'stage direction', 'text': 'Enter KENT, GLOUCESTER, and EDMUND'}
+		{'type': 'speaker tag', 'speaker': 'KENT'}
+		{'type': 'line', 'identifier': '1.1.1', text: 'I thought the king had more affected the Duke of'}
+
+		order of object entries is not necessarily consistent
+	3. text-stripped-1.json, programmatic:
+		remove all act and scene objects
+	4. text-stripped-2.json, manual:
+		manually remove all stage directions not having to do with entrances, exits, or deaths
+		manually remove all entrances/exits for characters who do not speak
+		manually convert every entrance to look like one of these:
+			"Re-enter/Enter/Exit/Exeunt CHAR1"
+			"Re-enter/Enter/Exit/Exeunt CHAR1 and CHAR2"
+			"Re-enter/Enter/Exit/Exeunt CHAR1, CHAR2 and CHAR3"
+			"Re-enter/Enter/Exit/Exeunt CHAR1, CHAR2, CHAR3"
+			"Exit", "Dies" (just an exit from the character who last spoke)
+			"Exeunt" (an exit from all characters on stage)
+			with NO additional text or characters who do not speak
+			it is ok if there's an "and" in there, like 
+			"Enter KENT, GLOUCESTER, and EDMUND"
+			
+		convert the single line spoken by two people ("Dear sir, forbear") into two distinct lines
+	5. text-stripped-3.json, programmatic:
+		convert all remaining stage directions into one of three objects:
+			{'type': 'entrance', 'characters': ['KENT', 'GLOUCESTER', 'EDMUND']}
+			{'type': 'exit', 'characters': ['GLOUCESTER', 'EDMUND']}
+			{'type': 'exeunt', 'characters': []}	<-- all characters
+		make sure the code can handle all the cases above
+	6. text-lines.json, programmatic:
+		remove speaker tags, adding data to lines instead.
+		remove entrances and exits, adding data to lines instead.
+		strip() all lines
+
+		i.e.
+			{'type': 'entrance', 'characters': ['BOB', 'PHIL']}
+			{'type': 'speaker tag', 'character': 'BOB'}
+			{'type': 'line', 'identifier': '2.4.11', 'text': '	Speak now!'}
+			{'type': 'exit', 'characters': ['PHIL']}
+			{'type': 'speaker tag', 'character': 'PHIL'}
+			{'type': 'line', 'identifier': '2.4.12', 'text': 'He left.'}
+
+		becomes
+			{'type': 'line', identifier: '2.4.11', 'text': 'Speak now!', 'speaker': 'BOB', characters: ['BOB', 'PHIL']}
+			{'type': 'line', identifier: '2.4.12', 'text': 'He left.', 'speaker': 'PHIL', characters: ['PHIL']}
+
+		in this process, check for errors:
+			character not on stage speaks
+			character already on stage enters again
+	7. text-lines-sentiment.json, programmatic:
+		to each object, add a sentiment score.
+		this should be computed with a modified version of vader, where when a word is not present, it is checked against the nltk wordnet, and every synonym, chosen with the below code, who IS in the vader lexicon, is averaged together with equal weight (each synonym appearing only once) to determine the word score.
+			from nltk.corpus import wordnet
+			for synset in wordnet.synsets(word): print(synset.lemma_names())
