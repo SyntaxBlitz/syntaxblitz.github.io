@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>
+        </title>
+
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+
+            #sentiment-chart {
+                height: 400px;
+            }
+        </style>
+
+		<script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="king-lear.js"></script>
+
+        <script>
+            window.onload = function () {
+                var countsMatrix = {};
+                var totalSentimentMatrix = {};
+                averageSentimentMatrix = {};
+                for (var i = 0; i < characters.length; i++) {
+                    totalSentimentMatrix[characters[i]] = {};
+                    averageSentimentMatrix[characters[i]] = {};
+                    countsMatrix[characters[i]] = {};
+                    for (var j = 0; j < characters.length; j++) {
+                        totalSentimentMatrix[characters[i]][characters[j]] = 0;
+                        countsMatrix[characters[i]][characters[j]] = 0;
+                    }
+                }
+
+                for (var i = 0; i < lines.data.length; i++) {
+                    // we only consider a line's sentiment if it's nonzero.
+                    // this makes sure we only look at lines that are actually recognized by vader.
+                    // a line that is actually neutral, after the sentiment analysis, will almost certainly have some sentiment value,
+                    // even if it's close to zero. the likelihood of having a line that averages to exactly zero sentiment is negligible.
+                    if (lines.data[i].sentiment !== 0) {
+                        for (var j = 0; j < lines.data[i].characters.length; j++) {
+                            totalSentimentMatrix[lines.data[i].speaker][lines.data[i].characters[j]] += lines.data[i].sentiment;
+                            countsMatrix[lines.data[i].speaker][lines.data[i].characters[j]] += 1;
+                        }
+                    }
+                }
+
+                for (var i = 0; i < characters.length; i++) {
+                    for (var j = 0; j < characters.length; j++) {
+                        averageSentimentMatrix[characters[i]][characters[j]] =
+                            totalSentimentMatrix[characters[i]][characters[j]] /
+                            countsMatrix[characters[i]][characters[j]];
+                    }
+                }
+
+                google.charts.load('current', {
+                    'packages': [
+                        'corechart'
+                    ]
+                });
+
+                var onload = function () {
+                    renderChart();
+                };
+
+                var radioButtonsContainer = document.getElementById('radioButtons');
+				radioButtonsContainer.innerHTML = '';
+				for (var i = 0; i < characters.length; i++) {
+					radioButtonsContainer.innerHTML += '<div><label><input type="radio" name="characterRadios" value="' + characters[i] + '" id="radio-' + characters[i].replace(/ /g, '') + '" onclick="renderChart()"> ' + characters[i] + '</label></div>';
+				//	document.getElementById('checkbox-' + characters[i].replace(/ /g, '')).onclick = function() {alert(1)};
+				}
+
+                document.getElementById('radio-KINGLEAR').checked = true;
+
+                google.charts.setOnLoadCallback(onload);
+            };
+
+            function renderChart () {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Character');
+                data.addColumn('number', 'Average sentiment');
+
+                var toAdd = [];
+                var checked = '';
+                for (var i = 0; i < characters.length; i++) {
+                    if (document.getElementById('radio-' + characters[i].replace(/ /g, '')).checked) {
+                        checked = characters[i];
+                        break;
+                    }
+                }
+                for (var i = 0; i < characters.length; i++) {
+                    if (characters[i] === checked) continue;
+                    toAdd.push([characters[i], averageSentimentMatrix[checked][characters[i]]]);
+                }
+
+                toAdd.sort((arr1, arr2) => {
+                    if (isNaN(arr1[1])) return -1;
+                    if (isNaN(arr2[1])) return 1;
+                    return arr1[1] - arr2[1];
+                }).reverse();
+
+                data.addRows(toAdd);
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('sentiment-chart'));
+                chart.draw(data, {
+                    'hAxis': {'slantedTextAngle': 45}
+                });
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="sentiment-chart">
+
+        </div>
+
+        <div id="radioButtons">
+		</div>
+    </body>
+</html>
