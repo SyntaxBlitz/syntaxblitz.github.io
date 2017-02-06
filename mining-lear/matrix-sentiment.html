@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>
+        </title>
+
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+
+            .cell {
+                position: absolute;
+                width: 50px;
+                height: 35px;
+                padding: 0px;
+                padding-top: 15px;
+                text-align: center;
+                border-radius: 20px;
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            .header {
+                padding-top: 15px;
+                position: absolute;
+            }
+
+            .header-top {
+                transform: rotate(-45deg);
+                transform-origin: 0% 0%;
+            }
+
+            .identity {
+                border: 1px dashed rgba(0, 0, 0, .25);
+            }
+
+        </style>
+
+        <script src="king-lear.js"></script>
+
+        <script>
+            window.onload = function () {
+                var countsMatrix = {};
+                var totalSentimentMatrix = {};
+                var averageSentimentMatrix = {};
+                for (var i = 0; i < characters.length; i++) {
+                    totalSentimentMatrix[characters[i]] = {};
+                    averageSentimentMatrix[characters[i]] = {};
+                    countsMatrix[characters[i]] = {};
+                    for (var j = 0; j < characters.length; j++) {
+                        totalSentimentMatrix[characters[i]][characters[j]] = 0;
+                        countsMatrix[characters[i]][characters[j]] = 0;
+                    }
+                }
+
+                for (var i = 0; i < lines.data.length; i++) {
+                    // we only consider a line's sentiment if it's nonzero.
+                    // this makes sure we only look at lines that are actually recognized by vader.
+                    // a line that is actually neutral, after the sentiment analysis, will almost certainly have some sentiment value,
+                    // even if it's close to zero. the likelihood of having a line that averages to exactly zero sentiment is negligible.
+                    if (lines.data[i].sentiment !== 0) {
+                        for (var j = 0; j < lines.data[i].characters.length; j++) {
+                            totalSentimentMatrix[lines.data[i].speaker][lines.data[i].characters[j]] += lines.data[i].sentiment;
+                            countsMatrix[lines.data[i].speaker][lines.data[i].characters[j]] += 1;
+                        }
+                    }
+                }
+
+                for (var i = 0; i < characters.length; i++) {
+                    for (var j = 0; j < characters.length; j++) {
+                        averageSentimentMatrix[characters[i]][characters[j]] =
+                            totalSentimentMatrix[characters[i]][characters[j]] /
+                            countsMatrix[characters[i]][characters[j]];
+                    }
+                }
+
+                renderTable(averageSentimentMatrix);
+            };
+
+            function colorFromSentiment (sentiment) {
+                if (sentiment === 0) {
+                    return {
+                        r: 255,
+                        g: 255,
+                        b: 255
+                    };
+                } else if (sentiment < 0) {
+                    var gb = Math.floor((1 + sentiment) * 255);
+                    return {
+                        r: 255,
+                        g: gb,
+                        b: gb
+                    };
+                } else {
+                    var rb = Math.floor((1 - sentiment) * 255);
+                    return {
+                        r: rb,
+                        g: 192 + Math.floor(rb * (63 / 255)),
+                        b: rb
+                    };
+                }
+            }
+
+            function renderTable (averageSentimentMatrix) {
+                var sentimentMatrixContainer = document.getElementById('sentiment-matrix');
+
+                for (var i = 0; i < characters.length; i++) {
+                    var speakerLeftHeader = document.createElement('div');
+                    var speakerTopHeader = document.createElement('div');
+                    speakerLeftHeader.innerHTML = characters[i];
+                    speakerTopHeader.innerHTML = characters[i];
+
+                    speakerLeftHeader.classList.add('header');
+                    speakerLeftHeader.style.top = (i * 55 + 130) + 'px';
+                    speakerLeftHeader.style.left = '10px';
+
+                    speakerTopHeader.classList.add('header');
+                    speakerTopHeader.style.top = '100px';
+                    speakerTopHeader.style.left = (i * 55 + 150) + 'px';
+
+                    speakerTopHeader.classList.add('header-top');
+                    sentimentMatrixContainer.appendChild(speakerLeftHeader);
+                    sentimentMatrixContainer.appendChild(speakerTopHeader);
+
+                    for (var j = 0; j < characters.length; j++) {
+                        var cell = document.createElement('div');
+                        cell.classList.add('cell');
+                        cell.style.top = (i * 55 + 130) + 'px';
+                        cell.style.left = (j * 55 + 150) + 'px';
+
+                        var thisAverageSentiment = averageSentimentMatrix[characters[i]][characters[j]];
+                        if (!isNaN(thisAverageSentiment)) {
+                            cell.innerHTML = Math.round(thisAverageSentiment * 100) / 100;
+                            var color = colorFromSentiment(thisAverageSentiment);
+                            cell.style.background = 'rgb(' + color.r + ', ' + color.g + ', ' + color.b + ')';
+                            if (i === j) {
+                                cell.classList.add('identity');
+                            }
+                        }
+
+                        sentimentMatrixContainer.appendChild(cell);
+                    }
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="sentiment-matrix">
+
+        </div>
+    </body>
+</html>

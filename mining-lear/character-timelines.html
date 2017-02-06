@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>
+
+		</title>
+
+		<style>
+			#timeline {
+				height: 900px;
+			}
+
+			.google-visualization-tooltip {
+				padding-left: 10px !important;	/* CSS specificity is a nightmare :( */
+				padding-top: 10px !important;
+
+				font-family: sans-serif;
+			}
+		</style>
+
+		<script src="https://www.gstatic.com/charts/loader.js"></script>
+		<script src="king-lear.js"></script>
+		<script>
+			// parse character linea
+			var lastLineCharacters = new Set();
+			var characterRanges = {};
+			for (var i = 0; i < characters.length; i++) {
+				characterRanges[characters[i]] = [];
+			}
+
+			for (var i = 0; i < lines.data.length; i++) {
+				var line = lines.data[i];
+				var lineCharacters = new Set(line.characters);
+
+				for (var character of lineCharacters) {
+					if (!lastLineCharacters.has(character)) {
+						// start of a range for this character
+						characterRanges[character].push([i, i]);
+					}
+
+					// set the end of this character's most recent range to be this line's index
+					characterRanges[character][characterRanges[character].length - 1][1] = i;
+				}
+
+				lastLineCharacters = lineCharacters;
+			}
+
+			// visual basic mate
+			function checkedChanged (event) {
+				drawTimeline();
+			}
+
+			function showCheckboxes () {
+				// create check boxes
+				var checkBoxesContainer = document.getElementById('checkBoxes');
+				checkBoxesContainer.innerHTML = '';
+				for (var i = 0; i < characters.length; i++) {
+					checkBoxesContainer.innerHTML += '<div><label><input type="checkbox" checked="checked" id="checkbox-' + characters[i].replace(/ /g, '') + '" onclick="checkedChanged()"> ' + characters[i] + '</label></div>';
+				//	document.getElementById('checkbox-' + characters[i].replace(/ /g, '')).onclick = function() {alert(1)};
+				}
+			}
+
+			google.charts.load('current', {
+				'packages': [
+					'timeline'
+				]
+			});
+
+			var shownCheckboxes = false;
+
+			var onload = function () {
+				if (!shownCheckboxes) {
+					showCheckboxes();
+					shownCheckboxes = true;
+				}
+
+				drawTimeline();
+			}
+
+			var drawTimeline = function () {
+				var container = document.getElementById('timeline');
+				var chart = new google.visualization.Timeline(container);
+				var dataTable = new google.visualization.DataTable();
+
+				dataTable.addColumn({type: 'string', id: 'Character'});
+				dataTable.addColumn({type: 'string', id: 'dummy bar label'});
+				dataTable.addColumn({type: 'string', role: 'tooltip'});
+				dataTable.addColumn({type: 'date', id: 'Start'});
+				dataTable.addColumn({type: 'date', id: 'End'});
+
+				for (var characterName of characters) {
+					if (!document.getElementById('checkbox-' + characterName.replace(/ /g, '')).checked) {
+						continue;
+					}
+					for (var i = 0; i < characterRanges[characterName].length; i++) {
+						dataTable.addRow(
+							[characterName,
+								'',
+								(lines.data[characterRanges[characterName][i][0]].identifier) + ' - '
+									+ (lines.data[characterRanges[characterName][i][1]].identifier),
+								new Date(characterRanges[characterName][i][0] * 1000),
+								new Date(characterRanges[characterName][i][1] * 1000)]
+						);
+					}
+				}
+
+				chart.draw(dataTable, {
+					'avoidOverlappingGridLines': false
+				});
+			};
+
+			google.charts.setOnLoadCallback(onload);
+		</script>
+	</head>
+
+	<body>
+		<div id="timeline"></div>
+
+		<div id="checkBoxes">
+		</div>
+	</body>
+</html>

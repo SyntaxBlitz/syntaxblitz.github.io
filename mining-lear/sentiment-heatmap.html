@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>
+        </title>
+
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+
+            .heatmap-container {
+                width: 960px;
+                height: 40px;
+            }
+
+            ol {
+                font-size: 18pt;
+                font-weight: bold;
+            }
+        </style>
+
+        <script src="heatmap.min.js"></script>
+        <script src="king-lear.js"></script>
+
+        <script>
+            window.onload = function () {
+                showCheckboxes();
+                drawHeatmap();
+            };
+
+            function showCheckboxes () {
+				// create check boxes
+				var checkBoxesContainer = document.getElementById('checkBoxes');
+				checkBoxesContainer.innerHTML = '';
+				for (var i = 0; i < characters.length; i++) {
+					checkBoxesContainer.innerHTML += '<div><label><input type="checkbox" checked="checked" id="checkbox-' + characters[i].replace(/ /g, '') + '" onclick="drawHeatmap()"> ' + characters[i] + '</label></div>';
+				}
+			}
+
+            function drawLines (sorted) {
+                var positiveLinesOl = document.getElementById('positive-lines-ol');
+                var negativeLinesOl = document.getElementById('negative-lines-ol');
+                positiveLinesOl.innerHTML = '';
+                negativeLinesOl.innerHTML = '';
+
+                var negative = sorted.slice(0, 5);
+                var positive = sorted.slice(sorted.length - 5, sorted.length).reverse();
+
+                for (var i = 0; i < positive.length; i++) {
+                    var li = document.createElement('li');
+                    li.innerHTML = positive[i].speaker + ': ' + positive[i].text + ' (' + positive[i].identifier + ')';
+                    positiveLinesOl.appendChild(li);
+                }
+
+                for (var i = 0; i < negative.length; i++) {
+                    var li = document.createElement('li');
+                    li.innerHTML = negative[i].speaker + ': ' + negative[i].text + ' (' + negative[i].identifier + ')';
+                    negativeLinesOl.appendChild(li);
+                }
+            }
+
+            function drawHeatmap () {
+                var max = 0;
+                var min = 0;
+                for (var i = 0; i < lines.data.length; i++) {
+                    if (!document.getElementById('checkbox-' + lines.data[i].speaker.replace(/ /g, '')).checked) {
+                        continue;
+                    }
+                    if (lines.data[i].sentiment > max) {
+                        max = lines.data[i].sentiment;
+                    } else if (lines.data[i].sentiment < min) {
+                        min = lines.data[i].sentiment;
+                    }
+                }
+
+                var linesCopy = lines.data.slice();
+                linesCopy.sort(function (a, b) {
+                    return a.sentiment - b.sentiment;
+                });
+
+                linesCopy = linesCopy.filter((line) => document.getElementById('checkbox-' + line.speaker.replace(/ /g, '')).checked)
+
+                drawLines(linesCopy);
+
+                var power = 8;
+                var radius = 20;
+                var WIDTH = 960;
+
+                document.getElementById('positive-heatmap-container').innerHTML = '';
+                document.getElementById('negative-heatmap-container').innerHTML = '';
+
+                var positiveHeatmap = h337.create({
+                    container: document.getElementById('positive-heatmap-container'),
+                    radius: radius
+                });
+
+                var negativeHeatmap = h337.create({
+                    container: document.getElementById('negative-heatmap-container'),
+                    radius: radius
+                });
+
+                var positiveHeatmapData = [];
+                var negativeHeatmapData = [];
+                var dummy = {   // workaround. when kent (the first character to speak) is unchecked, the entire thing breaks. no clue why.
+                    x: 0,
+                    y: 0,
+                    value: 1e-100
+                };
+                positiveHeatmapData.push(dummy);
+                negativeHeatmapData.push(dummy);
+                for (var i = 0; i < lines.data.length; i++) {
+                    if (!document.getElementById('checkbox-' + lines.data[i].speaker.replace(/ /g, '')).checked) {
+                        continue;
+                    }
+                    //if (!document.getElementById())
+                    var toPush = {x: i / lines.data.length * (WIDTH - 2 * radius) + radius, y: radius, value: Math.abs(Math.pow(lines.data[i].sentiment, power))};
+                    if (lines.data[i].sentiment > 0) {
+                        positiveHeatmapData.push(toPush);
+                    } else if (lines.data[i].sentiment < 0) {
+                        negativeHeatmapData.push(toPush);
+                    }
+                }
+
+                positiveHeatmap.setData({
+                    max: Math.max(Math.pow(max, power), 1e-50), // math.max is part of the workaround so the dummy doesn't show when max/min is 0 because no characters are selected
+                    data: positiveHeatmapData
+                });
+
+                negativeHeatmap.setData({
+                    max: Math.max(Math.pow(Math.abs(min), power), 1e-50),
+                    data: negativeHeatmapData
+                });
+            }
+        </script>
+    </head>
+
+    <body>
+        <h1>
+            Positive lines:
+        </h1>
+        <div id="positive-lines">
+            <ol id="positive-lines-ol">
+            </ol>
+        </div>
+        <div id="positive-heatmap-container" class="heatmap-container">
+        </div>
+        <hr>
+        <h1>
+            Negative lines:
+        </h1>
+        <div id="negative-lines">
+            <ol id="negative-lines-ol">
+            </ol>
+        </div>
+        <div id="negative-heatmap-container" class="heatmap-container">
+        </div>
+
+        <div id="checkBoxes">
+		</div>
+    </body>
+</html>

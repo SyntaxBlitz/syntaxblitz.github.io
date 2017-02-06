@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>
+
+		</title>
+
+		<style>
+			#line-chart {
+				height: 900px;
+			}
+
+			.google-visualization-tooltip {
+				padding-left: 10px !important;	/* CSS specificity is a nightmare :( */
+				padding-top: 10px !important;
+
+				font-family: sans-serif;
+			}
+		</style>
+
+		<script src="https://www.gstatic.com/charts/loader.js"></script>
+		<script src="king-lear.js"></script>
+		<script>
+			// parse character lines
+			var lineHeights = [];
+			var characterLastTwentyFive = {};
+			for (var i = 0; i < characters.length; i++) {
+				characterLastTwentyFive[characters[i]] = [];
+			}
+			characterLastTwentyFive['all'] = []
+
+			for (var i = 0; i < lines.data.length; i++) {
+				lineHeights[i] = {};
+
+				if (lines.data[i].sentiment !== 0) {
+					characterLastTwentyFive[lines.data[i].speaker].push(lines.data[i].sentiment);
+					if (characterLastTwentyFive[lines.data[i].speaker].length > 100) {
+						characterLastTwentyFive[lines.data[i].speaker].shift();
+					}
+
+					characterLastTwentyFive['all'].push(lines.data[i].sentiment);
+					if (characterLastTwentyFive['all'].length > 100) {
+						characterLastTwentyFive['all'].shift();
+					}
+				}
+
+				lineHeights[i]['all'] =
+				characterLastTwentyFive['all'].reduce(
+					(acc, o) => o + acc
+					, 0) / characterLastTwentyFive['all'].length;
+				if (characterLastTwentyFive['all'].length < 25) {
+					lineHeights[i]['all'] = NaN;
+				}
+
+				for (var j = 0; j < characters.length; j++) {
+					lineHeights[i][characters[j]] =
+					characterLastTwentyFive[characters[j]].reduce(
+						(acc, o) => o + acc
+						, 0) / characterLastTwentyFive[characters[j]].length;
+					if (characterLastTwentyFive[characters[j]].length < 25) {
+						lineHeights[i][characters[j]] = NaN;
+					}
+				}
+			}
+
+			// visual basic mate
+			function checkedChanged (event) {
+				drawChart();
+			}
+
+			function showCheckboxes () {
+				// create check boxes
+				var checkBoxesContainer = document.getElementById('checkBoxes');
+				checkBoxesContainer.innerHTML = '';
+				checkBoxesContainer.innerHTML += '<div><label><input type="checkbox" checked="checked" id="checkbox-all" onclick="checkedChanged()"> All characters</label></div>';
+				for (var i = 0; i < characters.length; i++) {
+					checkBoxesContainer.innerHTML += '<div><label><input type="checkbox" checked="checked" id="checkbox-' + characters[i].replace(/ /g, '') + '" onclick="checkedChanged()"> ' + characters[i] + '</label></div>';
+				//	document.getElementById('checkbox-' + characters[i].replace(/ /g, '')).onclick = function() {alert(1)};
+				}
+			}
+
+			google.charts.load('current', {
+				'packages': [
+					'corechart'
+				]
+			});
+
+			var shownCheckboxes = false;
+
+			var onload = function () {
+				if (!shownCheckboxes) {
+					showCheckboxes();
+					shownCheckboxes = true;
+				}
+
+				drawChart();
+			}
+
+			var drawChart = function () {
+				var dataTable = new google.visualization.DataTable();
+
+				dataTable.addColumn('string', 'Line');
+				if (document.getElementById('checkbox-all').checked)
+					dataTable.addColumn('number', 'All Characters');
+				for (var i = 0; i < characters.length; i++) {
+					if (!document.getElementById('checkbox-' + characters[i].replace(/ /g, '')).checked) continue;
+					dataTable.addColumn('number', characters[i]);
+				}
+
+				for (var i = 0; i < lines.data.length; i++) {
+					var toPush = [lines.data[i].identifier];
+					if (i % parseInt(document.getElementById('precision').value) !== 0) continue
+
+					if (document.getElementById('checkbox-all').checked)
+						toPush.push(lineHeights[i]['all']);
+					for (var j = 0; j < characters.length; j++) {
+						if (!document.getElementById('checkbox-' + characters[j].replace(/ /g, '')).checked) continue;
+						toPush.push(lineHeights[i][characters[j]]);
+					}
+					//console.log(toPush);
+					dataTable.addRow(toPush);
+				}
+
+				var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
+
+				chart.draw(dataTable, {
+					curveType: 'function',
+					legend: { position: 'right' }
+				});
+			};
+
+			google.charts.setOnLoadCallback(onload);
+		</script>
+	</head>
+
+	<body>
+		<div id="line-chart"></div>
+
+		Plot every <input type="number" id="precision" onchange="drawChart()" value="25"> lines<br>
+
+		<div id="checkBoxes">
+		</div>
+	</body>
+</html>
