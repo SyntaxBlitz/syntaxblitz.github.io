@@ -88,8 +88,16 @@ ConverterApp.controller('ConverterCtrl', function ($scope) {
 
 		console.log(cubeTimerLine.category, puzzleTypeMap);
 
-		var puzzle = puzzleTypeMap[trimQuotes(cubeTimerLine.category)][0];
-		var category = puzzleTypeMap[trimQuotes(cubeTimerLine.category)][1];
+		var categoryCT = trimQuotes(cubeTimerLine.category);
+		var puzzle, category;
+		if (categoryCT in puzzleTypeMap) {
+			puzzle = puzzleTypeMap[trimQuotes(cubeTimerLine.category)][0];
+			category = puzzleTypeMap[trimQuotes(cubeTimerLine.category)][1];
+		} else {
+			puzzle = '333';
+			category = trimQuotes(cubeTimerLine.category);
+		}
+		
 		var time = toMillis(trimQuotes(cubeTimerLine.time));
 		var date = trimQuotes(cubeTimerLine.timestamp);
 		var scramble = trimQuotes(cubeTimerLine.scramble);
