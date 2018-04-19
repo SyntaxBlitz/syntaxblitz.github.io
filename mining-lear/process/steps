@@ -42,7 +42,7 @@ steps:
 			{'type': 'entrance', 'characters': ['BOB', 'PHIL']}
 			{'type': 'speaker tag', 'character': 'BOB'}
 			{'type': 'line', 'identifier': '2.4.11', 'text': '	Speak now!'}
-			{'type': 'exit', 'characters': ['PHIL']}
+			{'type': 'exit', 'characters': ['BOB']}
 			{'type': 'speaker tag', 'character': 'PHIL'}
 			{'type': 'line', 'identifier': '2.4.12', 'text': 'He left.'}
 
