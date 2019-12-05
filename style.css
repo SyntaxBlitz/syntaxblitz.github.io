@@ -69,6 +69,15 @@ a:hover {
 	text-decoration: underline;
 }
 
+#content a {
+	text-decoration: underline;
+	text-decoration-color: #888;
+}
+
+#content a:hover {
+	text-decoration-color: #fff;
+}
+
 .code {
 	font-family: 'Droid Sans Mono', monospace;
 }
