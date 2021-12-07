@@ -114,7 +114,11 @@ ConverterApp.controller('ConverterCtrl', function ($scope) {
 	}
 
 	function trimQuotes (str) {
-		return str.substring(1, str.length - 1);
+		if (str.match(/^".*"$/)) {
+			return str.substring(1, str.length - 1);
+		} else {
+			return str;
+		}
 	}
 
 	function toMillis (cubeTimerTime) {
