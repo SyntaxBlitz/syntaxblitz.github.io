@@ -113,3 +113,12 @@ a:hover {
 .github-link a:hover {
 	text-decoration: none;
 }
+
+.grad-research-news {
+	background: #333;
+	padding: 10px;
+}
+
+.grad-research-news h3 {
+	margin-top: 0;
+}

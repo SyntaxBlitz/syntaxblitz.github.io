@@ -47,37 +47,90 @@
 		</div>
 
 		<div id="content">
-			<p>
-				While I was an undergraduate at Georgia Tech, I did research under <a href="https://www.cc.gatech.edu/home/thad/">Thad Starner</a>, working on developing <a href="https://gvu.gatech.edu/research/projects/passive-haptic-learning">Passive Haptic Learning (PHL)</a> as a solution for introducing users to <a href="https://en.wikipedia.org/wiki/Stenotype">computer stenography</a>.
-			</p>
-
-			<p>
-				With guidance from <a href="https://scholar.google.com/citations?user=ZRnEqnkAAAAJ">Caitlyn Seim</a>, I designed user studies, then built hardware, firmware, and software to power these studies. I ran tests, analyzed the results, iterated (a lot), and finally developed a working system. This work was the subject of my <a href="https://smartech.gatech.edu/handle/1853/61370">undergraduate thesis</a> as well as a conference publication:
-				<ul style="list-style-type: none;">
-					<li>
-						<a href="https://ieeexplore.ieee.org/abstract/document/8816077">
-							T. J. Aveni, C. Seim and T. Starner, “A preliminary apparatus and teaching structure for passive tactile training of stenography,” <em>2019 IEEE World Haptics Conference (WHC)</em>, Tokyo, Japan, 2019, pp. 383-388.
-						</a>
-					</li>
+			<div class="grad-research-header">
+				<h2>Since 2022</h2>
+			</div>
+			<div class="grad-research-news">
+				<h3>News!</h3>
+				
+				<ul>
+					<li>9/2023 &ndash; My demo submission (showcasing my system OmniFill) was accepted to UIST 2023! I will be presenting on Monday, October 30th at the evening demo session in San Francisco.</li>
+					<li>8/2023 &ndash; I passed my prelim exam! Ask me anything about HCI. I know <em>all</em> of it now.</li>
 				</ul>
-			</p>
+			</div>
+			<div class="grad-research-content">
+				<p>
+					These days, I&apos;m a Ph.D. student studying human-computer interaction in the <a href="https://bid.berkeley.edu/">Berkeley Institute of Design</a> group, studying under <a href="https://people.eecs.berkeley.edu/~bjoern/">Björn Hartmann</a> and <a href="https://www.armandofox.com/">Armando Fox</a>.
+				</p>
 
-			<p>
-				Below is a video of a presentation I gave on the topic at the Georgia Tech UROP Symposium in Spring 2018. This is from an earlier version of the work, before we had finalized and perfected the system.
-			</p>
+				<p>
+					Recently, I have been interested in systems, interfaces, and techniques that tackle the &ldquo;unwritten code&rdquo; of the world; what are all the tiny scripts, customizations, and analyses that no one ever bothers to implement? How would the world look different if we weren&apos;t limited to running just the code that has been hand-crafted by software engineers? What if code were economical to write even if it had only ten users in the world, each running it once a year? What about one user, as a one-off?
+				</p>
 
-			<iframe width="720" height="405" src="https://www.youtube.com/embed/aXeyVnR3Cug" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<p>
+					Even as a programmer, I have a mountain of code that might make my life easier or more interesting, if only I had the time and energy to write it. For non-programmers, it&apos;s not just a question of speed; plenty of tasks would require that the user learn a whole new skillset to instruct the computer capably.
+				</p>
 
-			<p>
-				I also assisted with the development of another paper by developing some of the core Android code used in its user studies:
-				<ul style="list-style-type: none;">
-					<li>
-						<a href="https://dl.acm.org/doi/10.1145/3267242.3267269">
-							C. Seim, R. Pontes, S. Kadiveti, Z. Adamjee, A. Cochran, T. Aveni, P. Presti, T. Starner. “Towards Haptic Learning on a Smartwatch,” <em>ISWC ’18</em>. ACM, New York, NY, USA, 2018
-						</a>
-					</li>
-				</ul>
-			</p>
+				<p>
+					To me, a special subset of users are the <em>improvisers</em>, people who use computers for highly dynamic tasks. How do we empower teachers to adapt their classroom technology to a student&apos;s clever question? How can artists define and then immediately use a new creative tool? How does a livestreamer modify their on-screen automations dynamically to engage with trends in their chat? When the task is not fixed, neither should be the available computing tools.
+				</p>
+
+				<p>
+					Some highly-customizable software can address particular task domains pretty flexibly, but the most expressive interfaces end up being the programming languages. Naturally, one approach is to teach people to code, something I&apos;ve spent a lot of my time doing. I&apos;m fond of approaches that give people a better intuition for how to specify their intent to their computers and of high-level languages that enable end-user programming.
+				</p>
+
+				<p>
+					But another option is to change the nature of intent specification. If computers can figure out what we want them to do, maybe we don&apos;t need to spend so much time specifying our intent through code. I&apos;m interested in end-user-accessible program synthesis tools, especially programming-by-example/demonstration.
+				</p>
+
+				<p>
+					Recently, large language models have given us new power in building tools that can leverage flexible specifications of user intent. One form of such flexibility is, of course, that we can speak to LLMs directly in natural language. Other flexibility is possible, though. My OmniFill work explores this, demonstrating that many tasks can be inferred by an LLM-backed system even without task-specific configuration or a natural language prompt, provided the language model can access context relevant to the task specification.
+				</p>
+
+				<p>
+					I&apos;m interested especially in tools that are practical to deploy in the real world. That means we need to handle that &ldquo;last twenty percent&rdquo; of the way to a useful solution, handling the things that come up out in people&apos;s lives, the stuff that makes or breaks the utility of a tool. Often, the messiness of the real world, the presence of exceptions and imperfections in actual computer use, means that the almost-useful research prototypes go unused.
+				</p>
+					
+				<p>
+					I don&apos;t think this is just a problem for the industry people implementing the research to fix; I think there are research questions here about how to span that final gap. My hunch (and my experience!) is that LLMs, with how flexibly they can take input in varying formats and language, may be a big step in making it practical to build systems that are robust to the entropy of practical use cases. That&apos;s not to say that interaction techniques (e.g. to prevent exceptions from making tools useless) don&apos;t also play a role. I&apos;m especially interested in discovering the landscape of such interaction techniques in LLM-backed systems.
+				</p>
+			</div>
+			<div class="undergrad-research-header">
+				<h2>2016 &ndash; 2019: Undergraduate Research</h2>
+			</div>
+			<div class="undergrad-research-content">
+				<p>
+					While I was an undergraduate at Georgia Tech, I did research under <a href="https://www.cc.gatech.edu/home/thad/">Thad Starner</a>, working on developing <a href="https://gvu.gatech.edu/research/projects/passive-haptic-learning">Passive Haptic Learning (PHL)</a> as a solution for introducing users to <a href="https://en.wikipedia.org/wiki/Stenotype">computer stenography</a>.
+				</p>
+
+				<p>
+					With guidance from <a href="https://scholar.google.com/citations?user=ZRnEqnkAAAAJ">Caitlyn Seim</a>, I designed user studies, then built hardware, firmware, and software to power these studies. I ran tests, analyzed the results, iterated (a lot), and finally developed a working system. This work was the subject of my <a href="https://smartech.gatech.edu/handle/1853/61370">undergraduate thesis</a> as well as a conference publication:
+					<ul style="list-style-type: none;">
+						<li>
+							<a href="https://ieeexplore.ieee.org/abstract/document/8816077">
+								T. J. Aveni, C. Seim and T. Starner, “A preliminary apparatus and teaching structure for passive tactile training of stenography,” <em>2019 IEEE World Haptics Conference (WHC)</em>, Tokyo, Japan, 2019, pp. 383-388.
+							</a>
+						</li>
+					</ul>
+				</p>
+
+				<p>
+					Below is a video of a presentation I gave on the topic at the Georgia Tech UROP Symposium in Spring 2018. This is from an earlier version of the work, before we had refined and finalized the system.
+				</p>
+
+				<iframe width="720" height="405" src="https://www.youtube.com/embed/aXeyVnR3Cug" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+				<p>
+					I also assisted with the development of another paper by developing some of the core Android code used in its user studies:
+					<ul style="list-style-type: none;">
+						<li>
+							<a href="https://dl.acm.org/doi/10.1145/3267242.3267269">
+								C. Seim, R. Pontes, S. Kadiveti, Z. Adamjee, A. Cochran, T. Aveni, P. Presti, T. Starner. “Towards Haptic Learning on a Smartwatch,” <em>ISWC ’18</em>. ACM, New York, NY, USA, 2018
+							</a>
+						</li>
+					</ul>
+				</p>
+			</div>
 		</div>
 
 		<script>
