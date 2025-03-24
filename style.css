@@ -1,124 +1,169 @@
 body {
-	background-color: #444;
-	margin:  0;
-	padding: 0;
+  background-color: #444;
+  margin: 0;
+  padding: 0;
 
-	color: #eee;
-	font-family: 'Noto Sans', sans-serif;
+  color: #eee;
+  font-family: "Noto Sans", sans-serif;
 }
 
 #header {
-	margin-left:  80px;
-	margin-top:   60px;
-	margin-right: 80px;
+  margin-left: 80px;
+  margin-top: 60px;
+  margin-right: 80px;
 }
 
-nav, #navigation, #navigation li {
-	display: inline;
-	margin:  0; /* do a bit of a reset on the margin & padding so we can customise later */
-	padding: 0;
+nav,
+#navigation,
+#navigation li {
+  display: inline;
+  margin: 0; /* do a bit of a reset on the margin & padding so we can customise later */
+  padding: 0;
 }
 
 nav {
-	display: inline-table; /* If the nav needs to be on a newline, we push ALL of it at once instead of splitting it up. */
+  display: inline-table; /* If the nav needs to be on a newline, we push ALL of it at once instead of splitting it up. */
 }
 
 #navigation {
-	padding-right: 10px;
-	list-style-type: none;
+  padding-right: 10px;
+  list-style-type: none;
 }
 
 #navigation li {
-	margin-left: 20px;
-	
-	padding-left:  10px;
-	padding-right: 8px;	/* The 8px is a bit hackish, but the right padding looks too big otherwise  */
+  margin-left: 20px;
+
+  padding-left: 10px;
+  padding-right: 8px; /* The 8px is a bit hackish, but the right padding looks too big otherwise  */
 }
 
 #navigation li.active {
-	background-color: #333;
+  background-color: #333;
 }
 
 #navigation li.first {
-	margin-left: 0;
+  margin-left: 0;
 }
 
 #name {
-	font-size: 36pt;
-	color: #676767;
-	margin-right: 20px;
+  font-size: 36pt;
+  color: #676767;
+  margin-right: 20px;
 }
 
 #name:hover {
-	color: #eee;
+  color: #eee;
 }
 
 #content {
-	margin-left:  150px;
-	margin-right: 80px; /* enforce text wrapping before it reaches the very right of the screen during resize */
-	margin-top:   40px;
-	width: 800px;
+  margin-left: 150px;
+  margin-right: 80px; /* enforce text wrapping before it reaches the very right of the screen during resize */
+  margin-top: 40px;
+  width: 800px;
 }
 
 a {
-	text-decoration: none;
-	color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 
 a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 #content a {
-	text-decoration: underline;
-	text-decoration-color: #888;
+  text-decoration: underline;
+  text-decoration-color: #888;
 }
 
 #content a:hover {
-	text-decoration-color: #fff;
+  text-decoration-color: #fff;
 }
 
 .code {
-	font-family: 'Droid Sans Mono', monospace;
+  font-family: "Droid Sans Mono", monospace;
 }
 
 .project {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .project-name {
-	font-size: 18pt;
+  font-size: 18pt;
 }
 
 .project-name a {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .project-name a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .project-description {
-	padding-left: 40px;
+  padding-left: 40px;
 }
 
 .github-link {
-	margin-bottom: 100px;
+  margin-bottom: 100px;
 }
 
 .github-link a {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .github-link a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .grad-research-news {
-	background: #333;
-	padding: 10px;
+  background: #333;
+  padding: 10px;
 }
 
 .grad-research-news h3 {
-	margin-top: 0;
+  margin-top: 0;
+}
+
+.publications {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#content .publication-link {
+  text-decoration: none;
+
+  & .publication {
+    display: flex;
+    flex-direction: column;
+    background-color: #555;
+    padding: 10px;
+    border-radius: 4px;
+    gap: 4px;
+    margin-left: 12px;
+
+    transition: background-color 0.1s ease, transform 0.1s ease;
+    &:hover {
+      background-color: #666;
+      transform: translateX(-6px);
+    }
+
+    & .publication-title {
+      font-size: 14pt;
+      font-weight: bold;
+    }
+
+    & .publication-authors {
+      font-size: 12pt;
+    }
+
+    & .publication-venue {
+      font-style: oblique;
+    }
+  }
+}
+
+.author-me {
+  text-decoration: underline;
 }
