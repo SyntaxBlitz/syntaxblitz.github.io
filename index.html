@@ -127,30 +127,35 @@
               src: "images/taipei.webp",
               alt: "Taipei 2024, me",
               width: 240,
+			  height: 16 / 9 * 240,
               caption: "Taipei 2024, me",
             },
             {
               src: "images/taipei-2.webp",
               alt: "Taipei 2024, @jastakeit",
               width: 240,
+			  height: 16 / 9 * 240,
               caption: "Taipei 2024, @jastakeit",
             },
             {
               src: "images/jiufen.webp",
               alt: "Jiufen 2024, me",
               width: 240,
+              height: 16 / 9 * 240,
               caption: "Jiufen 2024, me",
             },
             {
               src: "images/cat.webp",
               alt: "Seattle 2023, @ilyues",
               width: 240,
+			  height: 16 / 9 * 240,
               caption: "Seattle 2023, @ilyues",
             },
             {
               src: "images/tulum.webp",
               alt: "Tulum 2024, dad",
               width: 240,
+			  height: 16 / 9 * 240,
               caption: "Tulum 2024, dad",
             },
           ];
@@ -159,6 +164,7 @@
           const img = document.createElement("img");
           img.src = chosen.src;
           img.width = chosen.width;
+		  img.height = chosen.height;
           img.alt = chosen.alt;
 
           const caption = document.createElement("span");
