@@ -62,6 +62,42 @@ nav {
   width: 800px;
 }
 
+#content-leftright {
+  margin-left: 150px;
+  margin-right: 80px; /* enforce text wrapping before it reaches the very right of the screen during resize */
+  margin-top: 40px;
+
+  display: flex;
+  flex-direction: row;
+
+  gap: 60px;
+
+  & .left {
+    width: 800px;
+  }
+
+  & .right {
+    & .me-image {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+
+      & img {
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+
+      & .caption {
+        font-style: oblique;
+        font-size: 10pt;
+        color: #999;
+		padding-right: 8px;
+      }
+    }
+  }
+}
+
 a {
   text-decoration: none;
   color: #fff;
@@ -71,12 +107,14 @@ a:hover {
   text-decoration: underline;
 }
 
-#content a {
+#content a,
+#content-leftright a {
   text-decoration: underline;
   text-decoration-color: #888;
 }
 
-#content a:hover {
+#content a:hover,
+#content-leftright a:hover {
   text-decoration-color: #fff;
 }
 

@@ -60,66 +60,115 @@
       </nav>
     </div>
 
-    <div id="content">
-      <p>Hi! I'm Tim (he/him).</p>
-
-      <p>
-        I'm in my third year as a Ph.D. student in computer science at the
-        <a href="https://eecs.berkeley.edu/"
-          >University of California, Berkeley</a
-        >, advised by <a href="https://www.armandofox.com/">Armando Fox</a> and
-        <a href="https://people.eecs.berkeley.edu/~bjoern/">Björn Hartmann</a>.
-        Recently, my research has taken the form of investigations into ways we
-        can equip people (especially non-programmers) to build their own
-        software workflows, especially using AI to help glue components
-        together.
-      </p>
-
-      <p>
-        I love teaching, and pedagogy is always on my mind. If you're one of my
-        past students, hi! Feel free to contact me about anything, always.
-      </p>
-
-      <p>
-        I'm also really interested in (human) languages. Though I only really
-        have a functional understanding of English and French, I love learning
-        about relationships between languages. To that end, I've spent time
-        picking up basic skills in Spanish, American Sign Language, and
-        Mandarin.
-      </p>
-
-      <p>
-        For my Internet identities and PGP key, see
-        <a href="https://keybase.io/syntax">keybase.io</a>. (<a
-          href="/keybase.txt"
-          >proof</a
-        >)<br />
-      </p>
-
-      <div>
-        Contact me for pretty much any reason!
-        <ul style="margin-top: 0; list-style-type: none">
-          <li>
-            on Matrix:
-            <a href="https://matrix.to/#/@me:timothyaveni.com"
-              >@me:timothyaveni.com</a
-            >
-          </li>
-          <li>
-            or by email:
-            <a href="mailto:tja@berkeley.edu">tja@berkeley.edu</a> /
-            <a href="mailto:me@timothyaveni.com">me@timothyaveni.com</a>
-          </li>
-        </ul>
-
-        <div style="padding-left: 40px">
-          <p>
-            I don't read my inbox on LinkedIn, and I'm
-            <strong>not</strong> currently looking for full-time job
-            opportunities. If you send me recruiting mail without at least
-            acknowledging this line on my website, you will not get a response.
-          </p>
+    <div id="content-leftright">
+      <div class="left">
+        <p>Hi! I'm Tim (he/him).</p>
+        <p>
+          I'm in my third year as a Ph.D. student in computer science at the
+          <a href="https://eecs.berkeley.edu/"
+            >University of California, Berkeley</a
+          >, advised by
+          <a href="https://www.armandofox.com/">Armando Fox</a> and
+          <a href="https://people.eecs.berkeley.edu/~bjoern/">Björn Hartmann</a
+          >. Recently, my research has taken the form of investigations into
+          ways we can equip people (especially non-programmers) to build their
+          own software workflows, especially using AI to help glue components
+          together.
+        </p>
+        <p>
+          I love teaching, and pedagogy is always on my mind. If you're one of
+          my past students, hi! Feel free to contact me about anything, always.
+        </p>
+        <p>
+          I'm also really interested in (human) languages. Though I only really
+          have a functional understanding of English and French, I love learning
+          about relationships between languages. To that end, I've spent time
+          picking up basic skills in Spanish, American Sign Language, and
+          Mandarin.
+        </p>
+        <p>
+          For my Internet identities and PGP key, see
+          <a href="https://keybase.io/syntax">keybase.io</a>. (<a
+            href="/keybase.txt"
+            >proof</a
+          >)<br />
+        </p>
+        <div>
+          Contact me for pretty much any reason!
+          <ul style="margin-top: 0; list-style-type: none">
+            <li>
+              on Matrix:
+              <a href="https://matrix.to/#/@me:timothyaveni.com"
+                >@me:timothyaveni.com</a
+              >
+            </li>
+            <li>
+              or by email:
+              <a href="mailto:tja@berkeley.edu">tja@berkeley.edu</a> /
+              <a href="mailto:me@timothyaveni.com">me@timothyaveni.com</a>
+            </li>
+          </ul>
+          <div style="padding-left: 40px">
+            <p>
+              I don't read my inbox on LinkedIn, and I'm
+              <strong>not</strong> currently looking for full-time job
+              opportunities. If you send me recruiting mail without at least
+              acknowledging this line on my website, you will not get a
+              response.
+            </p>
+          </div>
         </div>
+      </div>
+      <div class="right">
+        <div class="me-image"></div>
+        <script>
+          const images = [
+            {
+              src: "images/taipei.webp",
+              alt: "Taipei 2024, me",
+              width: 240,
+              caption: "Taipei 2024, me",
+            },
+            {
+              src: "images/taipei-2.webp",
+              alt: "Taipei 2024, @jastakeit",
+              width: 240,
+              caption: "Taipei 2024, @jastakeit",
+            },
+            {
+              src: "images/jiufen.webp",
+              alt: "Jiufen 2024, me",
+              width: 240,
+              caption: "Jiufen 2024, me",
+            },
+            {
+              src: "images/cat.webp",
+              alt: "Seattle 2023, @ilyues",
+              width: 240,
+              caption: "Seattle 2023, @ilyues",
+            },
+            {
+              src: "images/tulum.webp",
+              alt: "Tulum 2024, dad",
+              width: 240,
+              caption: "Tulum 2024, dad",
+            },
+          ];
+
+          const chosen = images[Math.floor(Math.random() * images.length)];
+          const img = document.createElement("img");
+          img.src = chosen.src;
+          img.width = chosen.width;
+          img.alt = chosen.alt;
+
+          const caption = document.createElement("span");
+          caption.className = "caption";
+          caption.innerText = chosen.caption;
+
+          const container = document.querySelector(".me-image");
+          container.appendChild(img);
+          container.appendChild(caption);
+        </script>
       </div>
     </div>
 
