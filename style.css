@@ -172,7 +172,7 @@ a:hover {
 #content .publication-link {
   text-decoration: none;
 
-  &:hover, &:active {
+  &:hover, &:focus {
     & .publication {
       background-color: #666;
       transform: translateX(-6px);
