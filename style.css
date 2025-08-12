@@ -172,6 +172,13 @@ a:hover {
 #content .publication-link {
   text-decoration: none;
 
+  &:hover, &:active {
+    & .publication {
+      background-color: #666;
+      transform: translateX(-6px);
+    }
+  }
+
   & .publication {
     display: flex;
     flex-direction: column;
@@ -182,10 +189,6 @@ a:hover {
     margin-left: 12px;
 
     transition: background-color 0.1s ease, transform 0.1s ease;
-    &:hover, &:active {
-      background-color: #666;
-      transform: translateX(-6px);
-    }
 
     & .publication-title {
       font-size: 14pt;
