@@ -182,7 +182,7 @@ a:hover {
     margin-left: 12px;
 
     transition: background-color 0.1s ease, transform 0.1s ease;
-    &:hover {
+    &:hover, &:active {
       background-color: #666;
       transform: translateX(-6px);
     }
