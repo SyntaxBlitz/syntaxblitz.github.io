@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Undertow Metronome</title>
+		
+		<script src="data.js">
+			This is where the data for Undertow measures is stored.
+		</script>
+		
+		<script src="met.js">
+			This is where all the cool stuff is.
+		</script>
+		
+		<style>
+			@import url(met.css);
+		</style>
+
+    <script defer data-domain="timothyaveni.com" src="https://plausible.syntaxblitz.net/js/script.file-downloads.hash.outbound-links.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+	</head>
+
+	<body>
+		<div id="loadingDiv">
+			Loading!
+		</div>
+		<audio src="highClick.mp3" id="audio_highClick">
+			Your browser doesn't support the HTML5 audio element. You'll need to get a better browser (or update the one you've got) to use the metronome.
+		</audio>
+		<audio src="lowClick.mp3" id="audio_lowClick"></audio>
+		<audio src="subClick.mp3" id="audio_subClick"></audio>
+
+		<div id="content">	<!-- normally I dynamically make all the elements in JavaScript but that's ugly so here I go -->
+			You'll want to avoid minimising the page or switching to another tab while the metronome is running. It will get all off and sound really sad if you do that.<br>
+			<button id="startStopButton">
+				Start!
+			</button>
+			<button id="subdivideButton">
+				Turn subdivision on
+			</button>
+			<button id="modeButton">
+				Currently running through Undertow
+			</button>
+			<br>
+			Tempo: <input type="range" id="bpmSlider" min="20" max="400" value="120" />
+			<input type="number" id="bpmNumber" min="20" max="400" value="120" />
+			<br>
+			<div id="currentMeasure">
+				<label for="currentMeasureNumber">
+					Current measure: 
+				</label>
+				<input type="text" id="currentMeasureNumber" min="1" max="209" value="1" /> <!-- this used to be type "number", but I wanted you to be able to type in rehearsal markings too. -->
+				(or type A-V to jump to that rehearsal marking. The metronome will keep track of when the music switches to steady 4/4.)
+			</div>
+			<br>
+			<br>
+			<div id="beatString"></div>
+		</div>
+	</body>
+</html>

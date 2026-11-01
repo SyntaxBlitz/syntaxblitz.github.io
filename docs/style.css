@@ -1,0 +1,235 @@
+body {
+  background-color: #444;
+  margin: 0;
+  padding: 0;
+
+  color: #eee;
+  font-family: "Noto Sans", sans-serif;
+}
+
+#header {
+  margin-left: 80px;
+  margin-top: 60px;
+  margin-right: 80px;
+}
+
+nav,
+#navigation,
+#navigation li {
+  display: inline;
+  margin: 0; /* do a bit of a reset on the margin & padding so we can customise later */
+  padding: 0;
+}
+
+nav {
+  display: inline-table; /* If the nav needs to be on a newline, we push ALL of it at once instead of splitting it up. */
+}
+
+#navigation {
+  padding-right: 10px;
+  list-style-type: none;
+}
+
+#navigation li {
+  margin-left: 20px;
+
+  padding-left: 10px;
+  padding-right: 8px; /* The 8px is a bit hackish, but the right padding looks too big otherwise  */
+}
+
+#navigation li.active {
+  background-color: #333;
+}
+
+#navigation li.first {
+  margin-left: 0;
+}
+
+#name {
+  font-size: 36pt;
+  color: #eee;
+  margin-right: 20px;
+}
+
+#content {
+  margin-left: 150px;
+  margin-right: 80px; /* enforce text wrapping before it reaches the very right of the screen during resize */
+  margin-top: 40px;
+  width: 800px;
+}
+
+#content-threecol {
+  margin-left: 150px;
+  margin-right: 80px; /* enforce text wrapping before it reaches the very right of the screen during resize */
+  margin-top: 40px;
+
+  display: flex;
+  flex-direction: row;
+
+  gap: 60px;
+
+  & .leftcol {
+    width: 200px;
+    & h2 {
+      margin: 0;
+    }
+  }
+
+  & .maincol {
+    width: 500px;
+  }
+
+  & .right {
+    & .me-image {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+
+      & img {
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+
+      & .caption {
+        font-style: oblique;
+        font-size: 10pt;
+        color: #999;
+		padding-right: 8px;
+      }
+    }
+  }
+}
+
+.news {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+.news li {
+  margin-bottom: 26px;
+}
+
+.news p {
+  margin: 0;
+}
+
+.news time {
+  display: block;
+  text-align: right;
+  font-size: 0.8em;
+  font-variant: small-caps;
+  color: #ddd;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#content a,
+#content-threecol a {
+  text-decoration: underline;
+  text-decoration-color: #888;
+}
+
+#content a:hover,
+#content-threecol a:hover {
+  text-decoration-color: #fff;
+}
+
+.code {
+  font-family: "Droid Sans Mono", monospace;
+}
+
+.project {
+  margin-bottom: 30px;
+}
+
+.project-name {
+  font-size: 18pt;
+}
+
+.project-name a {
+  text-decoration: underline;
+}
+
+.project-name a:hover {
+  text-decoration: none;
+}
+
+.project-description {
+  padding-left: 40px;
+}
+
+.github-link {
+  margin-bottom: 100px;
+}
+
+.github-link a {
+  text-decoration: underline;
+}
+
+.github-link a:hover {
+  text-decoration: none;
+}
+
+.grad-research-news {
+  background: #333;
+  padding: 10px;
+}
+
+.grad-research-news h3 {
+  margin-top: 0;
+}
+
+.publications {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#content .publication-link {
+  text-decoration: none;
+
+  &:hover, &:focus {
+    & .publication {
+      background-color: #666;
+      transform: translateX(-6px);
+    }
+  }
+
+  & .publication {
+    display: flex;
+    flex-direction: column;
+    background-color: #555;
+    padding: 10px;
+    border-radius: 4px;
+    gap: 4px;
+    margin-left: 12px;
+
+    transition: background-color 0.1s ease, transform 0.1s ease;
+
+    & .publication-title {
+      font-size: 14pt;
+      font-weight: bold;
+    }
+
+    & .publication-authors {
+      font-size: 12pt;
+    }
+
+    & .publication-venue {
+      font-style: oblique;
+    }
+  }
+}
+
+.author-me {
+  text-decoration: underline;
+}

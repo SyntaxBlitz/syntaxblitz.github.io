@@ -1,0 +1,71 @@
+==================================================================
+https://keybase.io/syntax
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://timothyaveni.com
+  * I am syntax (https://keybase.io/syntax) on keybase.
+  * I have a public key with fingerprint DA39 5C8A B1B7 452E 1ABA  9866 1889 D34C D21B D61E
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "da395c8ab1b7452e1aba98661889d34cd21bd61e",
+            "host": "keybase.io",
+            "key_id": "1889d34cd21bd61e",
+            "uid": "6408bf44b2cb28cc6c643c26f7e7d000",
+            "username": "syntax"
+        },
+        "service": {
+            "hostname": "timothyaveni.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1411121388,
+    "expire_in": 157680000,
+    "prev": "f288eaaf4c1082c4531a2eea802625eafd07784baef0e0be040e69df83919d05",
+    "seqno": 15,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v1.0.5
+Comment: https://keybase.io/crypto
+
+yML+AnicO8LLzMDFKNF52eeS9DU5xtMHvpQyhMgwvKlWSspPqVSyqlbKTgVTaZl5
+6alFBUWZeSVKVkopicaWpskWiUmGSeYmpkapholJiZYWZmaGFhaWKcYmySlGhkkp
+ZoapSjpKGfnFIB1AY5ISi1P1MvOBYkBOfGYKUBSL+lKwhJmJgUVSmolJklFykpFF
+crJZspmJcbKRWZp5qnmKgYEBSGFxalFeYm4qUHVxZV5JYoVSrY4SUKwsMzkV5GKQ
+xVD5kszc/JKMysSy1LxMveT8XKDugqL8kvzk/BygbEZJSYEVSHNJZQFIdXlqUjzU
+nPikzLwUoM+BGspSi4oz8/OUrAyBKpOBJgKVGpoYGhoaGRpbWOgopVYUZBalxmeC
+VJiam1kAHWkAsia1DGhkmpGFRWpiYppJsqGBhVGyiamxYaJRamqihYGRmZFpamJa
+ioG5uYVJUmJqmkGqQVKqgYlBqpllSpqFsaWhZYqBqRLIZ4V5+SCzge5MTAd5OjM9
+L7GktChVqfbQwRgWBkYuBjZWJlDkMXBxCsCitL+N/38Fw2Rpu1n7D97nkS5ZUHRR
+QdzocWBpgq/TdLa7v3eb3tn3bSffxXCuU2E6R8R/FH+SeaivscJDfkGko837Y1Hb
+nxSfEJy//ir3x/qiWsbeJ8ouPV/0q27IqZlbtPC6FXVO2vJNbk5KR5bXjqaSGfIq
+ao3NXyfv4Vg3Q26XL8OGzWn3+n7ebVzq8yNNTfeyyFfXCbnJ/yezhiUsPPLn9yU1
+m6oigRCbH2tTC2VlJm4TzHz7585/meUN7c5/D9uGx83b/oLp/puZp0V9bs9lq9uk
+5bPg8/eH5yNjZecxNakEmtvOlLp6zDYy/dGeyiMdLlxJzGGKRaWPfr3M5H4X9WtJ
+5IK4ILG9n09JFlXNC75bufvL6YszJvK+0TuTkNP3Nv1v86R/X6e/lJIxzVOzdbLs
+2bcvYK06u4Cty38ml8LpHttYTN6zhh60W+/tyJHtN3uy9rX60Mqz+09G/r59umDD
+vvhlLR1WnTtaklmENvxuk67YoqY/dwXbhov1bQ/2y3JWPm1lCXL+4fwvOCDP+umS
+02X70ncek3rCcFDZYtUBWw0WxkfHFRNm6F9Tf/ZokuX2P4VslTeW/vgbmWuVXrB5
+0rO5Qq8cp16/Vxt7rWT2pzzBE8lFFf9qlAOWLpp02OIPg9am1D+n+RVev1unbHTr
+e+AESRUvtwuL1zcVSce8dPqzzKog5eqMjfx/19x0Krt6s3P7mT2SjkwV/zQBB7SX
+Pw==
+=IE9R
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/syntax
+
+==================================================================
