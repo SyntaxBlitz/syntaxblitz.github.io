@@ -47,12 +47,8 @@ nav {
 
 #name {
   font-size: 36pt;
-  color: #676767;
-  margin-right: 20px;
-}
-
-#name:hover {
   color: #eee;
+  margin-right: 20px;
 }
 
 #content {
@@ -62,7 +58,7 @@ nav {
   width: 800px;
 }
 
-#content-leftright {
+#content-threecol {
   margin-left: 150px;
   margin-right: 80px; /* enforce text wrapping before it reaches the very right of the screen during resize */
   margin-top: 40px;
@@ -72,8 +68,15 @@ nav {
 
   gap: 60px;
 
-  & .left {
-    width: 800px;
+  & .leftcol {
+    width: 200px;
+    & h2 {
+      margin: 0;
+    }
+  }
+
+  & .maincol {
+    width: 500px;
   }
 
   & .right {
@@ -98,6 +101,28 @@ nav {
   }
 }
 
+.news {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+.news li {
+  margin-bottom: 26px;
+}
+
+.news p {
+  margin: 0;
+}
+
+.news time {
+  display: block;
+  text-align: right;
+  font-size: 0.8em;
+  font-variant: small-caps;
+  color: #ddd;
+}
+
 a {
   text-decoration: none;
   color: #fff;
@@ -108,13 +133,13 @@ a:hover {
 }
 
 #content a,
-#content-leftright a {
+#content-threecol a {
   text-decoration: underline;
   text-decoration-color: #888;
 }
 
 #content a:hover,
-#content-leftright a:hover {
+#content-threecol a:hover {
   text-decoration-color: #fff;
 }
 
