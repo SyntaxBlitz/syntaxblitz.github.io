@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="ConverterApp">
+	<head>
+		<meta charset="utf-8" />
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+		<script src="controller.js"></script>
+	</head>
+
+	<body ng-controller="ConverterCtrl">
+		<input type="file" id="fileInput" ng-show="data === null">
+		<div>{{message}}</div>
+	</body>
+</html>

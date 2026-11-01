@@ -1,0 +1,59 @@
+// psuedocode:
+from music21 import *
+from pyPdf import PdfFileReader, PdfFileWriter
+from reportlab.pdfgen import canvas
+from reportlab.lib import pagesizes
+from reportlab.lib.units import inch
+
+generate .ly file in music21
+	music = converter.parse(fName + ".xml")
+	music.write("lily", "../ly/" + fName + ".ly")
+	
+
+change .ly file as follows:
+	replace line "\header { } " with block:
+		\header {pypdf
+			tagline = ""
+		} 
+	replace line "\paper { }" with block:
+		\paper {
+			#(set-paper-size "letter")
+			left-margin = 1\in
+			right-margin = 1\in
+			top-margin = 10\in
+		}
+	replace line "\layout {" with block:
+		\layout {
+		  indent = #0
+		  ragged-last = ##f
+		
+turn .ly into .pdf:
+	subprocess.call([	#will wait for finish exec
+		"c:\Program Files (x86)\lilypond\usr\bin\lilypond.exe",
+		"c:\wamp\www\syntaxblitz.github.io\portfolio\ly\" + fName + ".ly",
+		"c:\wamp\www\syntaxblitz.github.io\portfolio\pdf-music\" + fName + ".pdf"
+	])
+
+merge pages and add page number:
+	pageNumber = 23 #or something
+	musicLine = PdfFileReader(file(musicPdfDir + pageNumber + ".pdf", "rb"))
+	page = PdfFileReader(file(pageDir + pageNumber + ".pdf", "rb"))
+	documentation.getPage(0).mergePage(musicLine.getPage(0))
+	
+	hexPageNumber = str(hex(int(pageNumber)))[2:]
+	pageNumberPdfCanvas = canvas.Canvas(pageNumberPdfsDir + pageNumber + ".pdf", pagesize=pagesizes.letter)
+	
+	pageNumberPdfCanvas.setFont("Cambria", 12)
+	textObject = pageNumberPdfCanvas.beginText(inch * .5, inch * .5)
+	pageNumberPdfCanvas.drawText(hexPageNumber)
+	
+	pageNumberPdfCanvas.showPage()
+	pageNumberPdfCanvas.save()
+	documentation.getPage(0).
+
+	output = PdfFileWriter()
+	output.addPage(documentation.getPage(0))
+
+	outStream = file("C:\wamp\www\syntaxblitz.github.io\portfolio\TEST.pdf", "wb")
+	output.write(outStream)
+	outStream.close()

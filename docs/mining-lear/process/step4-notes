@@ -1,0 +1,38 @@
+Fool goes in
+	exit
+The Fool runs out from the hovel
+	entrance
+5.2 beginning:
+	Alarum within. Enter, with drum and colours, KING LEAR, CORDELIA, and Soldiers, over the stage; and exeunt
+	ignored
+As with all generally-named characters, "another captain" is the same captain	
+"Enter a Captain" near the end, with another captain already on-stage: entrance ignored
+
+the line:
+	{
+	    "text": "soft music playing; Gentleman, and others attending.",
+	    "type": "line",
+	    "identifier": "4.7.1"
+	},
+
+	is removed. code will need to be written to allow for a scene starting at line 2
+	Gentleman enters with cordelia, kent, and doctor. Lear enters at this time as well (on a bed asleep)
+1.1.173 is duplicated. it is not a big deal if the code cannot handle this. just pick someone who ought not speak. but really, it should be fine
+
+remove
+
+    {
+      "type": "speaker tag",
+      "speaker": "EDGAR"
+    },
+    {
+      "text": "[Within]  Fathom and half, fathom and half! Poor Tom!"o,
+      "type": "line",
+      "identifier": "3.4.41"
+    },
+
+
+ten instances of '[Aside]  ' removed.
+two instances of '[Aside]\t' removed.
+
+in one line, Lear is referred to as just LEAR instead of KING LEAR. This is remedied.
